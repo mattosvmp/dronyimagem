@@ -150,9 +150,9 @@
     margin-top: var(--header-height-mobile);
   }
 
-  .logo-text a,
-  .main-header.scrolled .logo-text a {
-    font-size: 1.3rem;
+  .header-logo-img,
+  .main-header.scrolled .header-logo-img {
+    height: 55px;
   }
 
   .hero-content h1 {

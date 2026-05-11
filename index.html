@@ -67,7 +67,13 @@
     <header class="main-header">
       <div class="container header-container">
         <div class="logo-text">
-          <a href="#">DronyImagem</a>
+          <a href="#" aria-label="DronyImagem">
+            <img
+              src="logo-dronyimagem-2026.png"
+              alt="DronyImagem"
+              class="header-logo-img"
+            />
+          </a>
         </div>
         <nav class="main-nav">
           <ul>
@@ -75,27 +81,16 @@
               <a href="#solucoes" data-translate-key="navSolutions">Soluções</a>
             </li>
             <li>
+              <a href="#clientes" data-translate-key="navClients"
+                >Nossos Clientes</a
+              >
+            </li>
+            <li>
               <a href="#portifolio" data-translate-key="navPortfolio"
                 >Portfólio</a
               >
             </li>
             <li><a href="#sobre" data-translate-key="navAbout">Sobre</a></li>
-            <li>
-              <a href="#valores" data-translate-key="navValues">Valores</a>
-            </li>
-            <li>
-              <a href="#missao" data-translate-key="navMission">Missão</a>
-            </li>
-            <li>
-              <a
-                href="lumasky.html"
-                class="btn-lumasky"
-                data-translate-key="navLumasky"
-                data-translate-href="lumaskyPageLink"
-              >
-                Lumasky
-              </a>
-            </li>
 
             <li class="social-links-li mobile-only">
               <div class="social-links-menu">
@@ -188,7 +183,7 @@
         playsinline
       ></video>
       <img
-        src="logo-dronyimagem.png"
+        src="logo-dronyimagem-2026.png"
         alt="DronyImagem Logo"
         class="hero-logo"
       />
@@ -267,7 +262,7 @@
             ></video>
             <div class="solucao-texto">
               <h3 data-translate-key="serviceRealEstateTitle">
-                📸 Imagens aéreas de imóveis
+                🏠 Filmagens de Residenciais e Condomínios
               </h3>
               <p data-translate-key="serviceRealEstateDesc">
                 Valorize seu imóvel ou empreendimento com fotos e vídeos aéreos
@@ -288,7 +283,7 @@
             ></video>
             <div class="solucao-texto">
               <h3 data-translate-key="serviceEventsTitle">
-                🎬 Vídeos aéreos de eventos
+                🎬 Vídeos de Eventos
               </h3>
               <p data-translate-key="service2Desc">
                 Surpreenda seu público com uma transmissão ao vivo feita por
@@ -300,7 +295,7 @@
             </div>
           </div>
 
-          <div class="solucao-item solucao-item-link">
+          <div class="solucao-item">
             <video
               class="solucao-video"
               src="video-card3.mp4#t=3"
@@ -310,10 +305,10 @@
               playsinline
             ></video>
             <div class="solucao-texto">
-              <h3 data-translate-key="serviceLumaskyTitle">
-                ✨ Representante Lumasky no Brasil
+              <h3 data-translate-key="serviceLightShowTitle">
+                ✨ Show de Drones de Luzes
               </h3>
-              <p data-translate-key="service3Desc">
+              <p data-translate-key="serviceLightShowDesc">
                 Encante o público com um show de drones sincronizados com luzes
                 e música. Perfeito para aberturas de eventos, ativações de
                 marca, inaugurações e celebrações especiais. Cada show é
@@ -321,14 +316,27 @@
                 tornando o céu o palco principal do seu evento.
               </p>
             </div>
-            <a
-              href="lumasky.html"
-              class="card-link-overlay"
-              data-translate-key="lumaskyAriaLabel"
-              aria-label="Saiba mais sobre shows com Lumasky"
-              data-translate-href="lumaskyPageLink"
-            >
-            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="clientes" class="clientes-section">
+      <div class="container">
+        <h2 class="section-title-with-icon" data-translate-key="clientsTitle">
+          Nossos Clientes
+        </h2>
+        <p class="subtitle" data-translate-key="clientsSubtitle">
+          Marcas que confiam na DronyImagem para registrar e impactar.
+        </p>
+      </div>
+      <div class="clientes-carousel" aria-label="Logos de clientes">
+        <div class="clientes-track" data-clientes-track>
+          <div class="cliente-logo">
+            <img src="img/clientes/ginco.svg" alt="Ginco" />
+          </div>
+          <div class="cliente-logo">
+            <img src="img/clientes/belvedere.svg" alt="Belvedere" />
           </div>
         </div>
       </div>
@@ -346,21 +354,65 @@
           veja como nossas filmagens aéreas e shows de drones impactam o público
           em cada detalhe.
         </p>
-        <div class="portifolio-cta-grid">
-          <a
-            href="galeria-fotos.html"
-            class="btn-principal"
-            data-translate-key="portfolioBtnPhotos"
-            data-translate-href="galleryPhotosPageLink"
-            >📸 Galeria de Fotos</a
-          >
-          <a
-            href="galeria-videos.html"
-            class="btn-principal"
-            data-translate-key="portfolioBtnVideos"
-            data-translate-href="galleryVideosPageLink"
-            >🎬 Galeria de Vídeos</a
-          >
+
+        <div class="portfolio-slider" data-portfolio-type="videos">
+          <div class="portfolio-slider-header">
+            <h3 data-translate-key="portfolioVideosTitle">🎬 Vídeos</h3>
+            <a
+              href="galeria-videos.html"
+              class="portfolio-see-all"
+              data-translate-key="portfolioSeeAllVideos"
+              data-translate-href="galleryVideosPageLink"
+              >Ver tudo →</a
+            >
+          </div>
+          <div class="portfolio-slider-viewport">
+            <button
+              class="portfolio-slider-btn portfolio-slider-prev"
+              aria-label="Anterior"
+              type="button"
+            >
+              ‹
+            </button>
+            <div class="portfolio-slider-track" data-slider-track></div>
+            <button
+              class="portfolio-slider-btn portfolio-slider-next"
+              aria-label="Próximo"
+              type="button"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+
+        <div class="portfolio-slider" data-portfolio-type="fotos">
+          <div class="portfolio-slider-header">
+            <h3 data-translate-key="portfolioPhotosTitle">📸 Fotos</h3>
+            <a
+              href="galeria-fotos.html"
+              class="portfolio-see-all"
+              data-translate-key="portfolioSeeAllPhotos"
+              data-translate-href="galleryPhotosPageLink"
+              >Ver tudo →</a
+            >
+          </div>
+          <div class="portfolio-slider-viewport">
+            <button
+              class="portfolio-slider-btn portfolio-slider-prev"
+              aria-label="Anterior"
+              type="button"
+            >
+              ‹
+            </button>
+            <div class="portfolio-slider-track" data-slider-track></div>
+            <button
+              class="portfolio-slider-btn portfolio-slider-next"
+              aria-label="Próximo"
+              type="button"
+            >
+              ›
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -404,17 +456,16 @@
             />
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="valores" class="valores-section">
-      <div class="container">
-        <h2 class="section-title-with-icon" data-translate-key="valuesTitle">
-          Valores
-        </h2>
-        <p class="subtitle" data-translate-key="valuesSubtitle">
-          Abaixo estão os principais pontos que guiam nosso valor de marca:
-        </p>
+        <div class="sobre-mission">
+          <p data-translate-key="missionDesc">
+            Nossa missão é transformar seu evento em um espetáculo visual
+            memorável. Usamos tecnologia aérea de ponta, a partir de filmagens
+            cinematográficas a shows de luzes para contar sua história do alto,
+            com segurança, criatividade e impacto.
+          </p>
+        </div>
+
         <div class="valores-grid">
           <div class="valor-item">
             <h3 data-translate-key="value1Title">Experiências Memoráveis</h3>
@@ -440,26 +491,6 @@
               segurança, valorizando sua marca.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="missao" class="missao-section">
-      <div class="container">
-        <h2 class="section-title-with-icon" data-translate-key="missionTitle">
-          Missão
-        </h2>
-        <p class="subtitle" data-translate-key="missionSubtitle">
-          Ser uma visão criativa a partir do alto, elevando a percepção e o
-          impacto dos seus projetos.
-        </p>
-        <div class="missao-content">
-          <p data-translate-key="missionDesc">
-            Nossa missão é transformar seu evento em um espetáculo visual
-            memorável. Usamos tecnologia aérea de ponta, a partir de filmagens
-            cinematográficas a shows de luzes para contar sua história do alto,
-            com segurança, criatividade e impacto.
-          </p>
         </div>
       </div>
     </section>
@@ -519,10 +550,10 @@
                 Acompanhamento de Obras
               </option>
               <option
-                value="Drone Light Show (Lumasky)"
+                value="Show de Drones de Luzes"
                 data-translate-key="formPurposeOpt3"
               >
-                Drone Light Show (Lumasky)
+                Show de Drones de Luzes
               </option>
               <option
                 value="Evento Esportivo"
@@ -585,7 +616,7 @@
           <div class="footer-logo">
             <a href="#">
               <img
-                src="logo-dronyimagem.png"
+                src="logo-dronyimagem-2026.png"
                 alt="DronyImagem Drone Solutions Logo"
                 class="footer-logo-img"
               />
@@ -644,10 +675,11 @@
               </li>
               <li><a href="#sobre" data-translate-key="navAbout">Sobre</a></li>
               <li>
-                <a href="#valores" data-translate-key="navValues">Valores</a>
-              </li>
-              <li>
-                <a href="#missao" data-translate-key="navMission">Missão</a>
+                <a
+                  href="#clientes"
+                  data-translate-key="navClients"
+                  >Nossos Clientes</a
+                >
               </li>
             </ul>
           </div>

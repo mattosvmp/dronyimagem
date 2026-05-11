@@ -226,7 +226,135 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 8. WHATSAPP FORM HANDLER (ATUALIZADO PARA GOOGLE ANALYTICS GA4)
+  // 8. CARROSSEL INFINITO DE CLIENTES (sem espaço vazio)
+  const clientesTrack = document.querySelector("[data-clientes-track]");
+  if (clientesTrack) {
+    const fillClientesTrack = () => {
+      const originals = Array.from(clientesTrack.children).filter(
+        (el) => !el.dataset.cloned
+      );
+      // Remove clones antigos (caso seja resize)
+      Array.from(clientesTrack.children)
+        .filter((el) => el.dataset.cloned)
+        .forEach((el) => el.remove());
+
+      const targetWidth = Math.max(window.innerWidth * 1.2, 1200);
+      // Clona em sequência até passar do alvo (uma "metade" do track)
+      let safety = 0;
+      while (clientesTrack.scrollWidth < targetWidth && safety < 50) {
+        originals.forEach((node) => {
+          const clone = node.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          clone.dataset.cloned = "true";
+          clientesTrack.appendChild(clone);
+        });
+        safety++;
+      }
+      // Duplica todo o conjunto atual (incluindo originais + clones) para
+      // criar a segunda metade idêntica que o keyframe translateX(-50%) precisa
+      Array.from(clientesTrack.children).forEach((node) => {
+        const clone = node.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.dataset.cloned = "true";
+        clientesTrack.appendChild(clone);
+      });
+    };
+
+    fillClientesTrack();
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(fillClientesTrack, 200);
+    });
+  }
+
+  // 9. SLIDERS DO PORTFÓLIO (FOTOS E VÍDEOS)
+  const portfolioSliders = document.querySelectorAll(".portfolio-slider");
+
+  if (portfolioSliders.length > 0) {
+    const buildVideoSlide = (item) => {
+      const id = item.youtube_id;
+      const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+      return `
+        <div class="portfolio-slide">
+          <a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">
+            <div class="portfolio-slide-media" style="background-image: url('${thumb}');">
+              <span class="play-icon" aria-hidden="true"></span>
+            </div>
+            <div class="portfolio-slide-caption">${item.titulo}</div>
+          </a>
+        </div>
+      `;
+    };
+
+    const buildPhotoSlide = (item) => `
+      <div class="portfolio-slide">
+        <a href="galeria-fotos.html">
+          <div class="portfolio-slide-media" style="background-image: url('${item.imagem_url}');"></div>
+          <div class="portfolio-slide-caption">${item.titulo}</div>
+        </a>
+      </div>
+    `;
+
+    const fetchJson = async (url) => {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (e) {
+        return null;
+      }
+    };
+
+    const wireScrollButtons = (slider) => {
+      const track = slider.querySelector("[data-slider-track]");
+      const prev = slider.querySelector(".portfolio-slider-prev");
+      const next = slider.querySelector(".portfolio-slider-next");
+      if (!track || !prev || !next) return;
+
+      const scrollByAmount = () => {
+        const first = track.querySelector(".portfolio-slide");
+        if (!first) return 320;
+        return first.getBoundingClientRect().width + 20;
+      };
+
+      const updateButtons = () => {
+        prev.disabled = track.scrollLeft <= 5;
+        next.disabled =
+          track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
+      };
+
+      prev.addEventListener("click", () => {
+        track.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
+      });
+      next.addEventListener("click", () => {
+        track.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
+      });
+      track.addEventListener("scroll", updateButtons, { passive: true });
+      updateButtons();
+    };
+
+    portfolioSliders.forEach(async (slider) => {
+      const track = slider.querySelector("[data-slider-track]");
+      if (!track) return;
+      const type = slider.dataset.portfolioType;
+
+      if (type === "videos") {
+        const data = await fetchJson("data/videos.json");
+        if (data && Array.isArray(data.lista_videos)) {
+          track.innerHTML = data.lista_videos.map(buildVideoSlide).join("");
+        }
+      } else if (type === "fotos") {
+        const data = await fetchJson("data/fotos.json");
+        if (data && Array.isArray(data.lista_fotos)) {
+          track.innerHTML = data.lista_fotos.map(buildPhotoSlide).join("");
+        }
+      }
+      wireScrollButtons(slider);
+    });
+  }
+
+  // 10. WHATSAPP FORM HANDLER (ATUALIZADO PARA GOOGLE ANALYTICS GA4)
   const whatsappForm = document.getElementById("whatsapp-form");
   if (whatsappForm) {
     whatsappForm.addEventListener("submit", (event) => {

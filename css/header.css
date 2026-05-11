@@ -27,18 +27,22 @@
 }
 /* ============================================= */
 
-/* LOGO COMO TEXTO */
+/* LOGO COMO IMAGEM */
 .logo-text {
   flex-shrink: 0;
   flex: 0 1 auto;
 }
 
 .logo-text a {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--text-color);
-  letter-spacing: 1px;
-  transition: all 0.4s ease;
+  display: inline-block;
+  line-height: 0;
+}
+
+.header-logo-img {
+  height: 110px;
+  width: auto;
+  display: block;
+  transition: height 0.4s ease;
 }
 
 /* NAVEGAÇÃO CENTRALIZADA */
@@ -71,15 +75,6 @@
 }
 
 .main-nav a:hover {
-  color: var(--accent-color);
-}
-
-/* BOTÃO LUMASKY */
-.btn-lumasky {
-  transition: color 0.3s;
-}
-
-.btn-lumasky:hover {
   color: var(--accent-color);
 }
 
@@ -135,9 +130,9 @@
   background-color: var(--darker-bg);
 }
 
-/* LOGO NO ESTADO ENCOLHIDO */
-.main-header.scrolled .logo-text a {
-  font-size: 1.5rem;
+/* LOGO NO ESTADO ENCOLHIDO — mantém tamanho */
+.main-header.scrolled .header-logo-img {
+  height: 110px;
 }
 
 /* Botão de menu mobile (fica fora do container) */
