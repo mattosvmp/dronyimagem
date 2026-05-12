@@ -1,0 +1,622 @@
+/* Estilos compartilhados das landing pages (lp/1..lp/5) */
+
+/* Ajusta o body para o header fixo do site principal */
+.lp-body {
+  padding-top: var(--header-height-large);
+}
+
+/* ------------------ HERO ------------------ */
+.lp-hero {
+  position: relative;
+  padding: 80px 0 100px;
+  background:
+    radial-gradient(ellipse at top right, rgba(255, 138, 0, 0.18), transparent 60%),
+    linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  text-align: left;
+  overflow: hidden;
+}
+
+.lp-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.lp-hero .container {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.lp-hero-tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  background-color: rgba(255, 138, 0, 0.1);
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 138, 0, 0.35);
+  margin-bottom: 22px;
+}
+
+.lp-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.lp-hero h1 .accent {
+  color: var(--accent-color);
+}
+
+.lp-hero-lead {
+  font-size: 1.15rem;
+  color: #ddd;
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+
+.lp-check-list {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.lp-check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: #eee;
+  font-size: 1rem;
+}
+
+.lp-check-list .lp-check-icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 138, 0, 0.12);
+  border: 1.5px solid var(--accent-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.lp-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.lp-btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  background-color: #25d366;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.lp-btn-whatsapp:hover {
+  background-color: #1ebd5b;
+  transform: translateY(-3px);
+}
+
+.lp-btn-whatsapp svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.lp-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 28px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-weight: 600;
+  border: 2px solid var(--text-color);
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.lp-btn-secondary:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--darker-bg);
+}
+
+.lp-hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lp-hero-visual img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 138, 0, 0.2);
+}
+
+.lp-hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle, rgba(255, 138, 0, 0.18), transparent 60%);
+  filter: blur(40px);
+  z-index: -1;
+}
+
+/* ------------------ SEÇÃO COMUM (ícones em linha) ------------------ */
+.lp-section {
+  padding: 80px 0;
+  text-align: center;
+  background-color: var(--dark-bg);
+}
+
+.lp-section.alt {
+  background-color: var(--darker-bg);
+}
+
+.lp-section h2 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  margin-bottom: 12px;
+}
+
+.lp-section h2 .accent {
+  color: var(--accent-color);
+}
+
+.lp-section .subtitle {
+  max-width: 720px;
+  margin: 0 auto 50px;
+}
+
+.lp-icons-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.lp-icon-card {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 28px 18px;
+  transition: border-color 0.3s, transform 0.3s, background-color 0.3s;
+}
+
+.lp-icon-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  background-color: rgba(255, 138, 0, 0.05);
+}
+
+.lp-icon-card .lp-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lp-icon-card .lp-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.lp-icon-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.lp-icon-card p {
+  font-size: 0.92rem;
+  color: #bbb;
+  line-height: 1.5;
+}
+
+/* ------------------ CARDS COM IMAGENS ------------------ */
+.lp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.lp-feature-card {
+  background-color: #0e0e0e;
+  border: 1px solid #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.lp-feature-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-color);
+}
+
+.lp-feature-card-img {
+  width: 100%;
+  height: 180px;
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.lp-feature-card-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.55));
+}
+
+.lp-feature-card-body {
+  padding: 22px 20px 24px;
+}
+
+.lp-feature-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
+
+.lp-feature-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* ------------------ BLOCO DE BENEFÍCIOS (CTA + 4 colunas) ------------------ */
+.lp-benefits {
+  padding: 70px 0;
+  background-color: var(--darker-bg);
+  border-top: 1px solid #1a1a1a;
+}
+
+.lp-benefits .container {
+  display: grid;
+  grid-template-columns: 1.1fr 2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.lp-benefits-pitch {
+  text-align: left;
+}
+
+.lp-benefits-pitch .eyebrow {
+  display: block;
+  color: var(--accent-color);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.lp-benefits-pitch h2 {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.lp-benefits-pitch p {
+  color: #bbb;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.lp-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+
+.lp-benefit {
+  padding: 8px;
+}
+
+.lp-benefit .lp-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  color: var(--accent-color);
+}
+
+.lp-benefit .lp-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.lp-benefit h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.lp-benefit p {
+  font-size: 0.88rem;
+  color: #aaa;
+  line-height: 1.5;
+}
+
+/* ------------------ CTA FINAL ------------------ */
+.lp-cta-final {
+  padding: 80px 0;
+  background:
+    linear-gradient(135deg, rgba(255, 138, 0, 0.18), rgba(255, 138, 0, 0) 60%),
+    var(--dark-bg);
+  text-align: center;
+}
+
+.lp-cta-final h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  margin-bottom: 16px;
+}
+
+.lp-cta-final p {
+  color: #ddd;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.lp-cta-final .lp-cta-buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* ------------------ TRILHA DE NAVEGAÇÃO ------------------ */
+.lp-breadcrumb {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+}
+
+.lp-breadcrumb a {
+  color: var(--accent-color);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.lp-breadcrumb a:hover {
+  color: #fff;
+}
+
+.lp-breadcrumb .sep {
+  margin: 0 8px;
+  color: #555;
+}
+
+/* Dropdown no último item do breadcrumb para trocar de solução */
+.lp-breadcrumb-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.lp-breadcrumb-dropdown[open] {
+  z-index: 40;
+}
+
+.lp-breadcrumb-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background-color: rgba(255, 138, 0, 0.08);
+  border: 1px solid rgba(255, 138, 0, 0.3);
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.lp-breadcrumb-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.lp-breadcrumb-dropdown summary::marker {
+  content: "";
+  font-size: 0;
+}
+
+.lp-breadcrumb-dropdown summary:hover {
+  background-color: rgba(255, 138, 0, 0.18);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+
+.lp-breadcrumb-dropdown summary .chevron {
+  font-size: 0.72em;
+  line-height: 1;
+  transition: transform 0.2s ease;
+  opacity: 0.85;
+}
+
+.lp-breadcrumb-dropdown[open] summary .chevron {
+  transform: rotate(180deg);
+}
+
+.lp-breadcrumb-dropdown[open] summary {
+  background-color: rgba(255, 138, 0, 0.22);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+
+.lp-breadcrumb-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background-color: rgba(10, 10, 10, 0.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid #1f1f1f;
+  border-radius: 12px;
+  min-width: 300px;
+  padding: 6px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 138, 0, 0.05);
+  z-index: 40;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+  text-align: left;
+  animation: lpBreadIn 0.2s ease;
+}
+
+@keyframes lpBreadIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lp-breadcrumb-menu a {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: #ddd;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lp-breadcrumb-menu a:hover {
+  background-color: rgba(255, 138, 0, 0.1);
+  color: var(--accent-color);
+}
+
+.lp-breadcrumb-menu a.current {
+  color: var(--accent-color);
+  background-color: rgba(255, 138, 0, 0.1);
+  font-weight: 700;
+}
+
+.lp-breadcrumb-menu a.current::after {
+  content: "•";
+  margin-left: auto;
+  color: var(--accent-color);
+  font-size: 1.4rem;
+  line-height: 0;
+}
+
+.lp-breadcrumb-menu a .num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 6px;
+  background-color: rgba(255, 138, 0, 0.18);
+  color: var(--accent-color);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+@media (max-width: 520px) {
+  .lp-breadcrumb-menu {
+    min-width: 260px;
+  }
+}
+
+/* ------------------ RESPONSIVO ------------------ */
+@media (max-width: 960px) {
+  .lp-body {
+    padding-top: var(--header-height-mobile);
+  }
+  .lp-hero {
+    padding: 50px 0 70px;
+  }
+  .lp-hero .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .lp-hero-visual {
+    order: -1;
+  }
+  .lp-hero-visual img {
+    max-width: 380px;
+  }
+  .lp-icons-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lp-benefits .container {
+    grid-template-columns: 1fr;
+  }
+  .lp-benefits-pitch {
+    text-align: center;
+  }
+  .lp-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .lp-hero h1 {
+    font-size: 2rem;
+  }
+  .lp-icons-row {
+    grid-template-columns: 1fr;
+  }
+  .lp-benefits-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .lp-section {
+    padding: 60px 0;
+  }
+}

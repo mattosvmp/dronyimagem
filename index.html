@@ -59,6 +59,147 @@
       rel="stylesheet"
     />
 
+    <style>
+      /* Dropdown abaixo do CTA — atalhos para landing pages.
+         Inline para evitar cache; específico desta página. */
+      .hero-solutions-dropdown {
+        position: relative;
+        margin-top: 24px;
+        text-align: center;
+      }
+      .hero-solutions-dropdown[open] { z-index: 25; }
+      .hero-solutions-toggle {
+        list-style: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 22px;
+        background-color: rgba(255, 255, 255, 0.06);
+        border: 1.5px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 600;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        user-select: none;
+      }
+      .hero-solutions-toggle::-webkit-details-marker { display: none; }
+      .hero-solutions-toggle::marker { content: ""; font-size: 0; }
+      .hero-solutions-toggle::before { content: none !important; }
+      .hero-solutions-toggle .icon-grid {
+        width: 16px;
+        height: 16px;
+        opacity: 0.85;
+      }
+      .hero-solutions-toggle .chevron {
+        font-size: 0.7em;
+        line-height: 1;
+        transition: transform 0.25s ease;
+        opacity: 0.85;
+      }
+      .hero-solutions-toggle:hover {
+        background-color: rgba(255, 138, 0, 0.18);
+        border-color: var(--accent-color);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 138, 0, 0.25);
+      }
+      .hero-solutions-dropdown[open] .hero-solutions-toggle {
+        background-color: rgba(255, 138, 0, 0.22);
+        border-color: var(--accent-color);
+        color: #fff;
+      }
+      .hero-solutions-dropdown[open] .hero-solutions-toggle .chevron {
+        transform: rotate(180deg);
+      }
+      .hero-solutions-panel {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0;
+        margin: 14px auto 0;
+        width: min(420px, calc(100% - 24px));
+        background-color: rgba(10, 10, 10, 0.92);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        border: 1px solid #1f1f1f;
+        border-radius: 16px;
+        padding: 8px;
+        text-align: left;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 138, 0, 0.06);
+        animation: heroPanelIn 0.22s ease;
+      }
+      @keyframes heroPanelIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .hero-solution-item {
+        display: flex !important;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: 11px;
+        color: #e0e0e0;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        text-decoration: none;
+      }
+      .hero-solution-item + .hero-solution-item {
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .hero-solution-item:hover {
+        background-color: rgba(255, 138, 0, 0.1);
+      }
+      .hero-solution-item .num {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0.12));
+        color: var(--accent-color);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(255, 138, 0, 0.3);
+      }
+      .hero-solution-item .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .hero-solution-item .title {
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.98rem;
+        line-height: 1.2;
+        margin-bottom: 2px;
+      }
+      .hero-solution-item .desc {
+        color: #8e8e8e;
+        font-size: 0.8rem;
+        line-height: 1.35;
+      }
+      .hero-solution-item .arrow {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1;
+        transition: color 0.2s ease, transform 0.2s ease;
+        flex-shrink: 0;
+      }
+      .hero-solution-item:hover .arrow {
+        color: var(--accent-color);
+        transform: translateX(3px);
+      }
+      .hero-solution-item:hover .title {
+        color: var(--accent-color);
+      }
+    </style>
+
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -200,6 +341,56 @@
           data-translate-key="heroButton"
           >Descubra Nossas Soluções</a
         >
+
+        <details class="hero-solutions-dropdown">
+          <summary class="hero-solutions-toggle">
+            <svg class="icon-grid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM152 248c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm120-24c0 13.3-10.7 24-24 24s-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24zm48 24c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg>
+            <span data-translate-key="heroSolToggle">Ver todas as soluções</span>
+            <span class="chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="hero-solutions-panel" role="menu">
+            <a href="lp/1/" class="hero-solution-item" role="menuitem">
+              <span class="num">01</span>
+              <div class="info">
+                <span class="title" data-translate-key="heroSol1Title">Meio Ambiente</span>
+                <span class="desc" data-translate-key="heroSol1Desc">Monitoramento, APP e licenciamento</span>
+              </div>
+              <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a href="lp/2/" class="hero-solution-item" role="menuitem">
+              <span class="num">02</span>
+              <div class="info">
+                <span class="title" data-translate-key="heroSol2Title">Agricultura de Precisão</span>
+                <span class="desc" data-translate-key="heroSol2Desc">NDVI e gestão de lavouras</span>
+              </div>
+              <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a href="lp/3/" class="hero-solution-item" role="menuitem">
+              <span class="num">03</span>
+              <div class="info">
+                <span class="title" data-translate-key="heroSol3Title">Agricultura — Detalhada</span>
+                <span class="desc" data-translate-key="heroSol3Desc">RTK, multiespectrais e índices avançados</span>
+              </div>
+              <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a href="lp/4/" class="hero-solution-item" role="menuitem">
+              <span class="num">04</span>
+              <div class="info">
+                <span class="title" data-translate-key="heroSol4Title">Meio Ambiente — Detalhada</span>
+                <span class="desc" data-translate-key="heroSol4Desc">Queimadas, recursos hídricos e fauna</span>
+              </div>
+              <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a href="lp/5/" class="hero-solution-item" role="menuitem">
+              <span class="num">05</span>
+              <div class="info">
+                <span class="title" data-translate-key="heroSol5Title">Energia Solar e Renováveis</span>
+                <span class="desc" data-translate-key="heroSol5Desc">Termografia e inspeção de painéis</span>
+              </div>
+              <span class="arrow" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </details>
 
         <div class="hero-socials">
           <a
