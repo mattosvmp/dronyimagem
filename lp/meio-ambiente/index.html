@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53GV2BVG');</script>
+<!-- End Google Tag Manager -->
+
+<meta name="description" content="Mapeamento de áreas degradadas, supressão vegetal e licenciamento ambiental com drone. Relatórios técnicos em dias para pequenos e médios produtores.">
+<meta name="author" content="DronyImagem">
+<title>Meio Ambiente | Mapeamento Ambiental com Drone — DronyImagem</title>
+<link rel="icon" href="../../favicon.ico">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DronyImagem">
+<meta property="og:title" content="Meio Ambiente | Mapeamento Ambiental com Drone — DronyImagem">
+<meta property="og:description" content="Mapeamento de áreas degradadas, supressão vegetal e licenciamento ambiental com drone. Relatórios técnicos em dias.">
+<meta property="og:image" content="https://dronyimagem.com.br/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; line-height: 1.6; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ── CORES ── */
+:root {
+  --verde:    #00c896;
+  --verde-esc:#009e78;
+  --cinza-1:  #111111;
+  --cinza-2:  #1a1a1a;
+  --cinza-3:  #232323;
+  --cinza-4:  #2e2e2e;
+  --txt-sec:  rgba(255,255,255,.55);
+  --borda:    rgba(255,255,255,.08);
+}
+
+/* ── NAV ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,10,10,.95); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--borda); padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 124px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-icon {
+  width: 36px; height: 36px; background: var(--verde); border-radius: 8px;
+  display: grid; place-items: center; font-size: 18px;
+}
+.logo-txt { font-size: 17px; font-weight: 800; letter-spacing: -.02em; }
+.logo-txt span { color: var(--verde); }
+nav { display: flex; align-items: center; gap: 28px; }
+nav a { font-size: 14px; font-weight: 500; color: var(--txt-sec); transition: color .2s; }
+nav a:hover { color: #fff; }
+.btn-nav {
+  background: var(--verde); color: #000; font-size: 14px; font-weight: 700;
+  padding: 10px 22px; border-radius: 6px; transition: background .2s, transform .15s;
+}
+.btn-nav:hover { background: var(--verde-esc); transform: translateY(-1px); }
+.nav-mobile { display: none; }
+
+/* ── BOTÕES ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  padding: 15px 30px; border-radius: 8px; border: none;
+  cursor: pointer; text-decoration: none; transition: all .2s;
+}
+.btn-green { background: var(--verde); color: #000; }
+.btn-green:hover { background: var(--verde-esc); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.25); }
+.btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+
+/* ── HERO ── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; padding: 164px 0 80px;
+  overflow: hidden; background: #0a0a0a;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 55% at 70% 50%, rgba(0,200,150,.1) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,200,150,.06) 0%, transparent 60%);
+}
+.hero-dots {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 20%, transparent 75%);
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: center;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--verde); margin-bottom: 20px;
+}
+.breadcrumb span { color: var(--txt-sec); }
+.hero-kicker {
+  font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--txt-sec); margin-bottom: 20px;
+}
+h1 {
+  font-size: clamp(44px, 5.5vw, 74px); font-weight: 900;
+  line-height: 1.0; letter-spacing: -.03em; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+h1 .verde { color: var(--verde); }
+.hero-desc {
+  font-size: 17px; line-height: 1.75; color: var(--txt-sec);
+  max-width: 500px; margin-bottom: 36px;
+}
+.hero-checks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.hero-check {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,.8);
+}
+.hero-check::before {
+  content: '✓'; width: 20px; height: 20px; flex-shrink: 0;
+  background: rgba(0,200,150,.15); color: var(--verde);
+  border-radius: 50%; display: grid; place-items: center;
+  font-size: 11px; font-weight: 800;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-stats { display: flex; gap: 36px; padding-top: 32px; border-top: 1px solid var(--borda); }
+.stat-n { font-size: 32px; font-weight: 900; letter-spacing: -.03em; color: #fff; line-height: 1; }
+.stat-n em { font-style: normal; color: var(--verde); }
+.stat-l { font-size: 12px; color: var(--txt-sec); margin-top: 3px; }
+
+/* HERO IMAGEM */
+.hero-img-wrap {
+  position: relative; border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--borda);
+  box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(0,200,150,.12);
+}
+.hero-img-wrap img {
+  width: 100%; height: 480px; object-fit: cover; display: block;
+  filter: brightness(.85);
+}
+.hero-img-badge {
+  position: absolute; bottom: 20px; left: 20px;
+  background: rgba(10,10,10,.88); backdrop-filter: blur(12px);
+  border: 1px solid var(--borda); border-radius: 10px;
+  padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+}
+.badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--verde); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)} }
+.badge-txt { font-size: 12px; font-weight: 600; }
+.badge-txt span { display: block; color: var(--txt-sec); font-size: 11px; font-weight: 400; }
+.hero-img-tag {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--verde); color: #000;
+  font-size: 11px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 99px;
+}
+
+/* ── SEÇÃO: INTRO CARDS ── */
+#intro {
+  padding: 80px 0; background: var(--cinza-1);
+  border-top: 1px solid var(--borda);
+}
+.intro-header { text-align: center; margin-bottom: 52px; }
+.section-kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--verde); margin-bottom: 12px;
+}
+h2 {
+  font-size: clamp(30px, 3.5vw, 44px); font-weight: 800;
+  line-height: 1.15; letter-spacing: -.025em; margin-bottom: 14px;
+}
+h2 em { font-style: normal; color: var(--verde); }
+.intro-sub { font-size: 16px; color: var(--txt-sec); max-width: 520px; margin: 0 auto; }
+.intro-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.intro-card {
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 12px; padding: 24px 18px; text-align: center;
+  transition: border-color .2s, background .2s;
+}
+.intro-card:hover { border-color: rgba(0,200,150,.35); background: rgba(0,200,150,.04); }
+.intro-card-ico { font-size: 28px; margin-bottom: 12px; }
+.intro-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.intro-card p { font-size: 12px; color: var(--txt-sec); line-height: 1.5; }
+
+/* ── SEÇÃO: SOLUÇÕES ── */
+#solucoes { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
+.sec-header { margin-bottom: 52px; }
+.sol-grid { display: flex; flex-direction: column; gap: 16px; }
+.sol-item {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: 20px; align-items: flex-start;
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 12px; padding: 26px 28px;
+  transition: border-color .25s, background .25s;
+}
+.sol-item:hover { border-color: rgba(0,200,150,.3); background: rgba(0,200,150,.03); }
+.sol-num {
+  width: 56px; height: 56px; flex-shrink: 0;
+  background: rgba(0,200,150,.1); border-radius: 10px;
+  display: grid; place-items: center;
+  font-size: 20px; font-weight: 900; color: var(--verde);
+  border: 1px solid rgba(0,200,150,.2);
+}
+.sol-content h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.sol-content p { font-size: 14px; color: var(--txt-sec); line-height: 1.65; }
+
+/* ── SEÇÃO: POR QUE NÓS ── */
+#porque { padding: 96px 0; background: var(--cinza-1); border-top: 1px solid var(--borda); }
+.porque-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.porque-text h2 { margin-bottom: 16px; }
+.porque-text p { font-size: 16px; color: var(--txt-sec); line-height: 1.75; margin-bottom: 32px; }
+.porque-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.porque-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px; background: var(--cinza-2);
+  border: 1px solid var(--borda); border-radius: 10px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85);
+  transition: border-color .2s;
+}
+.porque-row:hover { border-color: rgba(0,200,150,.3); }
+.porque-ico {
+  width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%;
+  background: rgba(0,200,150,.12); display: grid; place-items: center;
+  font-size: 14px;
+}
+.compare {
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 14px; overflow: hidden;
+}
+.compare-head {
+  background: var(--cinza-3); padding: 16px 24px;
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--txt-sec);
+  display: grid; grid-template-columns: 1fr 80px 1fr; text-align: center;
+}
+.compare-head span:first-child { text-align: left; }
+.compare-head span:last-child { text-align: right; color: var(--verde); }
+.compare-row {
+  display: grid; grid-template-columns: 1fr 80px 1fr;
+  align-items: center; padding: 14px 24px;
+  border-top: 1px solid var(--borda); font-size: 13px;
+}
+.compare-row:last-child { border-bottom: none; }
+.c-eles { color: rgba(255,255,255,.28); }
+.c-nos { color: var(--verde); font-weight: 600; text-align: right; }
+.c-vs {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  color: rgba(255,255,255,.18); text-align: center;
+  text-transform: uppercase;
+}
+
+/* ── SEÇÃO: COMO FUNCIONA ── */
+#como { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
+.como-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: flex-start; }
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step-item {
+  display: flex; gap: 20px; padding: 28px 0;
+  border-bottom: 1px solid var(--borda);
+  position: relative;
+}
+.step-item:last-child { border-bottom: none; }
+.step-n {
+  width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+  background: var(--verde); color: #000;
+  font-size: 16px; font-weight: 900; display: grid; place-items: center;
+}
+.step-txt h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.step-txt p { font-size: 13px; color: var(--txt-sec); line-height: 1.65; }
+.como-aside {
+  position: sticky; top: 100px;
+}
+.como-card {
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 14px; overflow: hidden;
+}
+.como-card-img {
+  width: 100%; height: 220px; object-fit: cover;
+  background: var(--cinza-3); display: flex; align-items: center; justify-content: center;
+  font-size: 60px; filter: grayscale(.3);
+}
+.como-card-body { padding: 24px; }
+.como-card-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.como-card-body p { font-size: 13px; color: var(--txt-sec); line-height: 1.65; margin-bottom: 20px; }
+.como-card-btn { width: 100%; padding: 14px; border-radius: 8px; justify-content: center; }
+
+/* ── SEÇÃO: PORTFÓLIO ── */
+#portfolio { padding: 96px 0; background: var(--cinza-1); border-top: 1px solid var(--borda); }
+.porto-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 12px; border-radius: 14px; overflow: hidden; }
+.porto-item {
+  position: relative; overflow: hidden;
+  background: var(--cinza-3); cursor: pointer;
+}
+.porto-item:first-child { grid-row: span 2; }
+.porto-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  background: linear-gradient(135deg, rgba(0,200,150,.06) 0%, rgba(10,10,10,.7) 100%);
+  border: 1px dashed rgba(0,200,150,.18);
+  font-size: 13px; color: rgba(255,255,255,.25); text-align: center; padding: 16px;
+}
+.porto-placeholder .pp-ico { font-size: 32px; opacity: .3; margin-bottom: 4px; }
+.porto-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.85));
+  padding: 24px 16px 14px;
+  font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+}
+.porto-cta { text-align: center; margin-top: 40px; }
+.porto-cta p { font-size: 15px; color: var(--txt-sec); margin-bottom: 22px; }
+
+/* ── SEÇÃO: FAQ ── */
+#faq { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
+.faq-wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 10px; overflow: hidden;
+}
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 22px; cursor: pointer; user-select: none;
+  font-size: 15px; font-weight: 600; transition: background .2s;
+}
+.faq-q:hover { background: rgba(0,200,150,.04); }
+.faq-q .faq-arr {
+  width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%;
+  background: rgba(255,255,255,.06); display: grid; place-items: center;
+  font-size: 18px; color: var(--verde); transition: transform .3s; line-height: 1;
+}
+.faq-item.open .faq-arr { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease, padding .3s;
+  padding: 0 22px; font-size: 14px; line-height: 1.75; color: var(--txt-sec);
+}
+.faq-item.open .faq-a { max-height: 300px; padding: 0 22px 20px; }
+
+/* ── SEÇÃO: CTA FINAL ── */
+#contato {
+  padding: 96px 0;
+  background: linear-gradient(180deg, var(--cinza-1) 0%, #0a0a0a 100%);
+  border-top: 1px solid var(--borda);
+}
+.cta-wrap {
+  background: var(--cinza-2); border: 1px solid rgba(0,200,150,.2);
+  border-radius: 20px; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 420px;
+}
+.cta-left { padding: 56px 48px; border-right: 1px solid var(--borda); }
+.cta-left .section-kicker { margin-bottom: 16px; }
+.cta-left h2 { font-size: clamp(30px, 3.5vw, 46px); margin-bottom: 16px; }
+.cta-left p { font-size: 16px; color: var(--txt-sec); line-height: 1.75; margin-bottom: 32px; }
+.cta-selos { display: flex; flex-direction: column; gap: 10px; }
+.cta-selo { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.7); }
+.cta-selo strong { color: var(--verde); }
+.cta-right { padding: 40px 36px; background: rgba(0,200,150,.03); }
+.form-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.form-sub { font-size: 13px; color: var(--txt-sec); margin-bottom: 26px; }
+.fg { margin-bottom: 14px; }
+.fg label {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 7px;
+}
+.fg input, .fg select {
+  width: 100%; background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+  padding: 13px 15px; font-size: 14px; color: #fff;
+  font-family: 'Inter', sans-serif; outline: none;
+  transition: border-color .2s, background .2s; -webkit-appearance: none; appearance: none;
+}
+.fg input::placeholder { color: rgba(255,255,255,.22); }
+.fg input:focus, .fg select:focus { border-color: var(--verde); background: rgba(0,200,150,.06); }
+.fg select option { background: #1a1a1a; }
+.btn-submit { width: 100%; padding: 16px; border-radius: 8px; font-size: 15px; justify-content: center; margin-top: 6px; }
+.form-privacy { font-size: 11px; color: rgba(255,255,255,.25); text-align: center; margin-top: 12px; }
+.wpp-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  display: flex; align-items: center; gap: 12px;
+  background: #25D366; color: #fff;
+  border-radius: 99px; padding: 14px 22px 14px 16px;
+  box-shadow: 0 8px 32px rgba(37,211,102,.4), 0 2px 8px rgba(0,0,0,.3);
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  animation: wpp-in .5s cubic-bezier(.34,1.56,.64,1) 1s both;
+}
+.wpp-float:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px rgba(37,211,102,.5); }
+.wpp-float svg { flex-shrink: 0; }
+.wpp-float-txt { display: flex; flex-direction: column; line-height: 1.2; }
+.wpp-float-txt small { font-size: 10px; font-weight: 500; opacity: .85; }
+@keyframes wpp-in { from{transform:translateY(80px);opacity:0} to{transform:translateY(0);opacity:1} }
+.wpp-dot { position:absolute;top:-4px;right:-4px;width:13px;height:13px;border-radius:50%;background:#ff4444;border:2px solid #fff;animation:wpulse 2s infinite; }
+@keyframes wpulse { 0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5} }
+
+/* ── FOOTER ── */
+footer {
+  background: #050505; border-top: 1px solid var(--borda); padding: 36px 24px;
+}
+.foot-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+}
+footer p { font-size: 12px; color: rgba(255,255,255,.25); }
+footer a { color: rgba(255,255,255,.35); transition: color .2s; }
+footer a:hover { color: #fff; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+  background: var(--verde); color: #000; border-radius: 10px;
+  padding: 15px 22px; font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; gap: 10px;
+  transform: translateY(100px); opacity: 0;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+  box-shadow: 0 8px 32px rgba(0,200,150,.25);
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── FADE IN ── */
+.fi { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+.fi.v { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .hero-inner, .porque-inner, .como-inner { grid-template-columns: 1fr; }
+  .cta-wrap { grid-template-columns: 1fr; }
+  .cta-left { border-right: none; border-bottom: 1px solid var(--borda); padding: 40px 32px; }
+  .intro-cards { grid-template-columns: repeat(3, 1fr); }
+  nav { display: none; }
+  .nav-mobile { display: block; font-size: 22px; cursor: pointer; color: #fff; background: none; border: none; }
+  .porto-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 190px); }
+  .porto-item:first-child { grid-column: span 2; grid-row: span 1; }
+}
+@media (max-width: 600px) {
+  .intro-cards { grid-template-columns: 1fr 1fr; }
+  .hero-btns { flex-direction: column; }
+  .btn { justify-content: center; }
+  .porto-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 170px); }
+  .porto-item:first-child { grid-column: 1; grid-row: span 1; }
+  .cta-left { padding: 32px 24px; }
+  .cta-right { padding: 28px 24px; }
+}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53GV2BVG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- ══ NAV ══════════════════════════════════════════ -->
+<header>
+  <div class="nav-inner">
+    <a href="https://dronyimagem.com.br/" class="logo-wrap" aria-label="DronyImagem">
+      <img src="../../logo-dronyimagem-2026.png" alt="DronyImagem — Drone Solutions" style="height:96px;width:auto;display:block">
+    </a>
+    <nav>
+      <a href="#solucoes">Soluções</a>
+      <a href="#como">Como funciona</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a href="#contato" class="btn-nav">Solicitar orçamento</a>
+    <button class="nav-mobile" onclick="document.querySelector('.nav-mobile-menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="fi">
+        <div class="breadcrumb">
+          <span>01</span>
+          <span style="opacity:.3">//</span>
+          <span>Meio Ambiente</span>
+        </div>
+        <div class="hero-kicker">DronyImagem — Mapeamento Ambiental</div>
+        <h1>MEIO<br>AMBIENTE</h1>
+        <p class="hero-desc">A gente vai até a sua área, voa com o drone, processa as imagens e entrega o laudo que o órgão ambiental pede — em dias, não em semanas.</p>
+        <div class="hero-checks">
+          <div class="hero-check">Mapeamento de áreas degradadas</div>
+          <div class="hero-check">Supressão vegetal e licenciamento</div>
+          <div class="hero-check">APP e Reserva Legal</div>
+          <div class="hero-check">Relatório técnico aceito pelo órgão</div>
+          <div class="hero-check">Atendemos pequenos e médios produtores</div>
+        </div>
+        <div class="hero-btns">
+          <a href="#contato" class="btn btn-outline">Solicitar orçamento</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-n">+<em>50</em></div>
+            <div class="stat-l">Áreas mapeadas</div>
+          </div>
+          <div>
+            <div class="stat-n"><em>MT</em></div>
+            <div class="stat-l">Mato Grosso</div>
+          </div>
+          <div>
+            <div class="stat-n"><em>24h</em></div>
+            <div class="stat-l">Para retornar seu contato</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fi" style="transition-delay:.2s">
+        <div class="hero-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop"
+            alt="Floresta vista de cima — mapeamento ambiental com drone"
+            loading="eager"
+          >
+          <div class="hero-img-tag">DRONYIMAGEM</div>
+          <div class="hero-img-badge">
+            <div class="badge-dot"></div>
+            <div class="badge-txt">
+              Operação ativa
+              <span>Drone homologado ANAC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTRO CARDS ════════════════════════════════ -->
+<section id="intro">
+  <div class="container">
+    <div class="intro-header fi">
+      <div class="section-kicker">Drone a serviço do meio ambiente</div>
+      <h2>Tecnologia aérea para<br><em>decisões responsáveis</em></h2>
+      <p class="intro-sub">Levantamentos precisos e rápidos para gestão, regularização e licenciamento ambiental.</p>
+    </div>
+    <div class="intro-cards">
+      <div class="intro-card fi" style="transition-delay:.05s">
+        <div class="intro-card-ico">🌿</div>
+        <h3>Preservação</h3>
+        <p>Proteja hoje o amanhã da sua área.</p>
+      </div>
+      <div class="intro-card fi" style="transition-delay:.1s">
+        <div class="intro-card-ico">📡</div>
+        <h3>Monitoramento</h3>
+        <p>Dados precisos, decisões assertivas.</p>
+      </div>
+      <div class="intro-card fi" style="transition-delay:.15s">
+        <div class="intro-card-ico">📊</div>
+        <h3>Análises</h3>
+        <p>Informações que geram impacto real.</p>
+      </div>
+      <div class="intro-card fi" style="transition-delay:.2s">
+        <div class="intro-card-ico">📋</div>
+        <h3>Licenciamento</h3>
+        <p>Agilidade e segurança nos processos.</p>
+      </div>
+      <div class="intro-card fi" style="transition-delay:.25s">
+        <div class="intro-card-ico">♻️</div>
+        <h3>Sustentabilidade</h3>
+        <p>Tecnologia que respeita e preserva.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUÇÕES ══════════════════════════════════ -->
+<section id="solucoes">
+  <div class="container">
+    <div class="sec-header fi">
+      <div class="section-kicker">Nossas soluções ambientais</div>
+      <h2>O que a gente<br><em>faz por você</em></h2>
+    </div>
+    <div class="sol-grid">
+      <div class="sol-item fi" style="transition-delay:.05s">
+        <div class="sol-num">01</div>
+        <div class="sol-content">
+          <h3>Mapeamento de Áreas Degradadas</h3>
+          <p>Identificação precisa de erosões, desmatamentos e áreas críticas. Imagens de alta resolução com coordenadas georreferenciadas prontas para laudos técnicos.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.1s">
+        <div class="sol-num">02</div>
+        <div class="sol-content">
+          <h3>Supressão Vegetal e Licenciamento</h3>
+          <p>Relatórios técnicos completos para processos de licenciamento ambiental junto ao IBAMA, SEMA e IAT. Documentação aceita sem ir e vir.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.15s">
+        <div class="sol-num">03</div>
+        <div class="sol-content">
+          <h3>APP e Reserva Legal</h3>
+          <p>Mapeamento e cálculo automático de Área de Preservação Permanente e Reserva Legal para gestão e regularização junto ao CAR.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.2s">
+        <div class="sol-num">04</div>
+        <div class="sol-content">
+          <h3>Monitoramento Ambiental</h3>
+          <p>Acompanhamento contínuo da vegetação, rios, lagos e áreas sensíveis. Dados inteligentes para planejamento sustentável e tomadas de decisão.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.25s">
+        <div class="sol-num">05</div>
+        <div class="sol-content">
+          <h3>Análises Geoambientais</h3>
+          <p>Dados inteligentes para planejamento sustentável, avaliação de passivos ambientais e tomadas de decisão baseadas em informação real.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POR QUE NÓS ════════════════════════════════ -->
+<section id="porque">
+  <div class="container">
+    <div class="porque-inner">
+      <div class="fi">
+        <div class="section-kicker">Por que escolher a DronyImagem</div>
+        <h2>Atendemos quem<br>os grandes<br><em>ignoram</em></h2>
+        <p>Médios e pequenos produtores merecem o mesmo rigor técnico das grandes operações. É exatamente isso que entregamos — com preço justo e atendimento direto.</p>
+        <div class="porque-list">
+          <div class="porque-row"><div class="porque-ico">✓</div>Foco em pequenos e médios produtores rurais</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Relatório aceito por IBAMA, SEMA e IAT</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Cobertura em Mato Grosso — MT</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Sem intermediários — equipe própria em campo</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Retorno em até 24h após o contato</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Drone homologado ANAC, operação 100% legal</div>
+        </div>
+      </div>
+
+      <div class="fi" style="transition-delay:.15s">
+        <div class="compare">
+          <div class="compare-head">
+            <span>Concorrentes</span>
+            <span>VS</span>
+            <span>DronyImagem</span>
+          </div>
+          <div class="compare-row">
+            <span class="c-eles">Só grandes áreas</span>
+            <span class="c-vs">PORTE</span>
+            <span class="c-nos">Pequenos e médios ✓</span>
+          </div>
+          <div class="compare-row">
+            <span class="c-eles">Brasília / nacional</span>
+            <span class="c-vs">REGIÃO</span>
+            <span class="c-nos">Mato Grosso — MT ✓</span>
+          </div>
+          <div class="compare-row">
+            <span class="c-eles">Semanas de espera</span>
+            <span class="c-vs">PRAZO</span>
+            <span class="c-nos">Resposta em 24h ✓</span>
+          </div>
+          <div class="compare-row">
+            <span class="c-eles">Foco urbano</span>
+            <span class="c-vs">FOCO</span>
+            <span class="c-nos">100% rural e ambiental ✓</span>
+          </div>
+          <div class="compare-row">
+            <span class="c-eles">Intermediários</span>
+            <span class="c-vs">ATEND.</span>
+            <span class="c-nos">Equipe direta ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMO FUNCIONA ══════════════════════════════ -->
+<section id="como">
+  <div class="container">
+    <div class="sec-header fi">
+      <div class="section-kicker">Processo</div>
+      <h2>Do contato ao laudo,<br><em>sem complicação</em></h2>
+    </div>
+    <div class="como-inner">
+      <div class="steps fi">
+        <div class="step-item">
+          <div class="step-n">01</div>
+          <div class="step-txt">
+            <h3>Você manda seus dados</h3>
+            <p>Preenche o formulário ou chama no WhatsApp com seu nome, estado e tipo de área. A gente retorna com um orçamento personalizado em até 24h.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-n">02</div>
+          <div class="step-txt">
+            <h3>A gente vai até você</h3>
+            <p>Agendamos o voo, cuidamos de toda a autorização do espaço aéreo junto à ANAC e ao DECEA, e a equipe vai até a sua propriedade no dia combinado.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-n">03</div>
+          <div class="step-txt">
+            <h3>Você recebe o laudo</h3>
+            <p>Processamos as imagens e entregamos o relatório técnico completo com dados georreferenciados — pronto para protocolar no órgão ambiental, cartório ou banco.</p>
+          </div>
+        </div>
+        <div class="step-item" style="border-bottom:none">
+          <div class="step-n" style="background:rgba(0,200,150,.15);color:var(--verde)">✓</div>
+          <div class="step-txt">
+            <h3>Resultado garantido</h3>
+            <p>Caso o órgão solicite algum ajuste no documento, nossa equipe revisa sem custo adicional. Você não fica na mão.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="como-aside fi" style="transition-delay:.2s">
+        <div class="como-card">
+          <div class="como-card-img" style="background:var(--cinza-3)">
+            <img
+              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=75&auto=format&fit=crop"
+              alt="Vista aérea de área rural"
+              style="width:100%;height:220px;object-fit:cover;filter:brightness(.7) grayscale(.2)"
+            >
+          </div>
+          <div class="como-card-body">
+            <h3>Pronto para um levantamento ambiental?</h3>
+            <p>Fale com nosso time, receba uma proposta personalizada e descubra como o drone pode acelerar o seu processo ambiental.</p>
+            <a href="https://wa.me/5565999396490?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20mapeamento%20ambiental." class="btn btn-green como-card-btn" target="_blank">
+              Falar no WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PORTFÓLIO ══════════════════════════════════ -->
+<section id="portfolio">
+  <div class="container">
+    <div class="sec-header fi">
+      <div class="section-kicker">Nosso trabalho</div>
+      <h2>Veja o que<br><em>já fizemos</em></h2>
+      <p class="intro-sub" style="margin-top:0">Projetos reais, em campo, com resultado.</p>
+    </div>
+    <div class="porto-grid fi" style="transition-delay:.1s">
+      <div class="porto-item">
+        <div class="porto-placeholder">
+          <span class="pp-ico">🛸</span>
+          <span>Inserir foto ou vídeo principal</span>
+        </div>
+        <div class="porto-overlay">Área degradada — Mato Grosso</div>
+      </div>
+      <div class="porto-item">
+        <div class="porto-placeholder"><span class="pp-ico">🌿</span><span>Foto projeto 2</span></div>
+        <div class="porto-overlay">Supressão vegetal — MT</div>
+      </div>
+      <div class="porto-item">
+        <div class="porto-placeholder"><span class="pp-ico">📐</span><span>Foto projeto 3</span></div>
+        <div class="porto-overlay">APP — MT</div>
+      </div>
+      <div class="porto-item">
+        <div class="porto-placeholder"><span class="pp-ico">🗺️</span><span>Foto projeto 4</span></div>
+        <div class="porto-overlay">Reserva Legal — MT</div>
+      </div>
+      <div class="porto-item">
+        <div class="porto-placeholder"><span class="pp-ico">🌾</span><span>Foto projeto 5</span></div>
+        <div class="porto-overlay">Licenciamento — PR</div>
+      </div>
+    </div>
+    <div class="porto-cta fi">
+      <p>Quer ver mais projetos ou tirar dúvidas sobre o processo?</p>
+      <a href="#contato" class="btn btn-outline">Falar com especialista</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ═══════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="sec-header fi" style="text-align:center;margin-bottom:48px">
+      <div class="section-kicker">Dúvidas frequentes</div>
+      <h2>Perguntas que<br><em>todo mundo faz</em></h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item fi">
+        <div class="faq-q" onclick="faq(this)">
+          Vocês atendem minha região?
+          <div class="faq-arr">+</div>
+        </div>
+        <div class="faq-a">Atendemos principalmente Mato Grosso — MT. Em caso de dúvida, chama a gente no WhatsApp que a gente verifica e te responde na hora.</div>
+      </div>
+      <div class="faq-item fi" style="transition-delay:.05s">
+        <div class="faq-q" onclick="faq(this)">
+          O relatório é aceito pelo órgão ambiental?
+          <div class="faq-arr">+</div>
+        </div>
+        <div class="faq-a">Sim. Nossos relatórios seguem os padrões técnicos exigidos por IBAMA e SEMA-MT. Se o órgão solicitar algum ajuste, a gente revisa sem custo extra.</div>
+      </div>
+      <div class="faq-item fi" style="transition-delay:.1s">
+        <div class="faq-q" onclick="faq(this)">
+          Qual o prazo para receber o relatório?
+          <div class="faq-arr">+</div>
+        </div>
+        <div class="faq-a">Após o voo, o processamento e o relatório ficam prontos em média em 5 a 10 dias úteis, dependendo do tamanho e complexidade da área. O prazo exato vem na proposta.</div>
+      </div>
+      <div class="faq-item fi" style="transition-delay:.15s">
+        <div class="faq-q" onclick="faq(this)">
+          Tem área mínima para contratar?
+          <div class="faq-arr">+</div>
+        </div>
+        <div class="faq-a">Não. Cada projeto é orçado individualmente. A gente atende desde pequenas propriedades até grandes áreas — manda o tamanho que a gente calcula o valor.</div>
+      </div>
+      <div class="faq-item fi" style="transition-delay:.2s">
+        <div class="faq-q" onclick="faq(this)">
+          Vocês cuidam da autorização do voo?
+          <div class="faq-arr">+</div>
+        </div>
+        <div class="faq-a">Sim, tudo. A gente cuida da autorização junto à ANAC e ao DECEA. Você só precisa nos passar as coordenadas da área — o restante é com a gente.</div>
+      </div>
+      <div class="faq-item fi" style="transition-delay:.25s">
+        <div class="faq-q" onclick="faq(this)">
+          Como peço um orçamento?
+          <div class="faq-arr">+</div>
+        </div>
+        <div class="faq-a">Preenche o formulário aqui embaixo ou chama direto no WhatsApp. A gente responde em até 24h com uma proposta feita para a sua área.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL / FORMULÁRIO ════════════════════ -->
+<section id="contato">
+  <div class="container">
+    <div class="cta-wrap fi">
+      <div class="cta-left">
+        <div class="section-kicker">Pronto para começar?</div>
+        <h2>Solicite seu<br><em>orçamento</em><br>gratuito</h2>
+        <p>Fale com nosso time, receba uma proposta personalizada e descubra como o drone pode acelerar o seu processo ambiental.</p>
+        <div class="cta-selos">
+          <div class="cta-selo"><strong>✓</strong> Retorno em até 24 horas</div>
+          <div class="cta-selo"><strong>✓</strong> Sem compromisso de contratação</div>
+          <div class="cta-selo"><strong>✓</strong> Drone homologado ANAC</div>
+          <div class="cta-selo"><strong>✓</strong> Atendemos Mato Grosso — MT</div>
+        </div>
+      </div>
+      <div class="cta-right">
+        <div class="form-title">Manda seus dados</div>
+        <div class="form-sub">A gente entra em contato em até 24h</div>
+        <div class="fg">
+          <label>Seu nome</label>
+          <input type="text" id="nome" placeholder="Como você se chama?">
+        </div>
+        <div class="fg">
+          <label>WhatsApp</label>
+          <input type="tel" id="wpp" placeholder="(11) 99999-9999">
+        </div>
+        <div class="fg">
+          <label>Estado da área</label>
+          <select id="estado">
+            <option value="" disabled selected>Onde fica a propriedade?</option>
+            <option>MT — Mato Grosso</option>
+            <option>Outra região</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>O que você precisa?</label>
+          <select id="servico">
+            <option value="" disabled selected>Tipo de serviço</option>
+            <option>Mapeamento de área degradada</option>
+            <option>Supressão vegetal / licenciamento</option>
+            <option>APP e Reserva Legal</option>
+            <option>Monitoramento ambiental</option>
+            <option>Outro serviço</option>
+          </select>
+        </div>
+        <button class="btn btn-green btn-submit" onclick="enviar()">Quero meu orçamento</button>
+
+        <div class="form-privacy">🔒 Seus dados ficam só com a gente. Sem spam.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════ -->
+<footer>
+  <div class="foot-inner">
+    <a href="https://dronyimagem.com.br/" class="logo-wrap" aria-label="DronyImagem">
+      <img src="../../logo-dronyimagem-2026.png" alt="DronyImagem — Drone Solutions" style="height:104px;width:auto;display:block">
+    </a>
+    <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap; font-size:13px">
+      <a href="https://www.instagram.com/dronyimagem/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@dronyimagem" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.youtube.com/@dronyimagem" target="_blank" rel="noopener">YouTube</a>
+      <a href="mailto:contatodronyimagem@gmail.com">contatodronyimagem@gmail.com</a>
+    </div>
+    <p>© 2026 DronyImagem. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ══ TOAST ══════════════════════════════════════ -->
+<div class="toast" id="toast">✅ Recebemos seu contato! Retornamos em até 24h.</div>
+
+<script>
+// Fade in on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+// FAQ
+function faq(el) {
+  const item = el.parentElement;
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+}
+
+// Form submit
+function enviar() {
+  const nome    = document.getElementById('nome').value.trim();
+  const wpp     = document.getElementById('wpp').value.trim();
+  const estado  = document.getElementById('estado').value || '';
+  const servico = document.getElementById('servico').value || '';
+  if (!nome || !wpp) { alert('Por favor, preencha seu nome e WhatsApp.'); return; }
+  const msg = encodeURIComponent(
+    `Olá! Vim pelo site e gostaria de um orçamento.\n\n` +
+    `*Nome:* ${nome}\n*Estado:* ${estado || 'não informado'}\n*Serviço:* ${servico || 'não informado'}`
+  );
+  document.getElementById('toast').classList.add('show');
+  setTimeout(() => document.getElementById('toast').classList.remove('show'), 4500);
+  // WhatsApp DronyImagem
+  setTimeout(() => window.open(`https://wa.me/5565999396490?text=${msg}`, '_blank'), 800);
+}
+</script>
+
+<!-- ══ WPP FLUTUANTE ═══════════════════════════════ -->
+<a href="https://wa.me/5565999396490?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20mapeamento%20ambiental." class="wpp-float" target="_blank" style="position:fixed">
+  <div class="wpp-dot"></div>
+  <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 23.882a.5.5 0 00.614.614l6.058-1.466A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 01-5.006-1.372l-.36-.213-3.733.902.919-3.643-.233-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+  <div class="wpp-float-txt">
+    Falar no WhatsApp
+    <small>Respondemos em até 24h</small>
+  </div>
+</a>
+</body>
+</html>
