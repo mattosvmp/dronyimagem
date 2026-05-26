@@ -76,6 +76,17 @@ nav a:hover { color: #fff; }
   padding: 10px 22px; border-radius: 6px; transition: background .2s, transform .15s;
 }
 .btn-nav:hover { background: var(--verde-esc); transform: translateY(-1px); }
+.btn-nav-wpp {
+  display: inline-grid; place-items: center;
+  width: 42px; height: 42px;
+  background: var(--verde); color: #000;
+  border-radius: 50%;
+  transition: background .2s, transform .15s;
+  flex-shrink: 0;
+}
+.btn-nav-wpp:hover { background: var(--verde-esc); transform: translateY(-1px); }
+.btn-nav-wpp svg { width: 22px; height: 22px; fill: #000; display: block; }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
 .nav-mobile { display: none; }
 
 /* ── BOTÕES ── */
@@ -212,8 +223,8 @@ h2 em { font-style: normal; color: var(--verde); }
 .intro-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
 .intro-card p { font-size: 12px; color: var(--txt-sec); line-height: 1.5; }
 
-/* ── SEÇÃO: SOLUÇÕES ── */
-#solucoes { padding: 16px 0 80px; background: #0a0a0a; }
+/* ── SEÇÃO: EXPERIÊNCIA COMPROVADA ── */
+#experiencia { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
 .indices-stats {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
   background: var(--cinza-2); border: 1px solid var(--borda);
@@ -241,8 +252,10 @@ h2 em { font-style: normal; color: var(--verde); }
   gap: 20px; align-items: flex-start;
   background: var(--cinza-2); border: 1px solid var(--borda);
   border-radius: 12px; padding: 26px 28px;
-  transition: border-color .25s, background .25s;
+  transition: border-color .25s, background .25s, transform .15s;
+  text-decoration: none; color: inherit;
 }
+a.sol-item:hover { transform: translateY(-2px); }
 .sol-item:hover { border-color: rgba(0,200,150,.3); background: rgba(0,200,150,.03); }
 .sol-num {
   width: 56px; height: 56px; flex-shrink: 0;
@@ -522,12 +535,12 @@ h2 em { font-style: normal; color: var(--verde); }
 .btn-submit { width: 100%; padding: 16px; border-radius: 8px; font-size: 15px; justify-content: center; margin-top: 6px; }
 .form-privacy { font-size: 11px; color: rgba(255,255,255,.25); text-align: center; margin-top: 12px; }
 .wpp-float {
-  position: fixed; bottom: 28px; right: 28px; z-index: 500;
-  display: flex; align-items: center; gap: 12px;
+  position: fixed; bottom: 32px; right: 32px; z-index: 500;
+  display: flex; align-items: center; gap: 14px;
   background: #25D366; color: #fff;
-  border-radius: 99px; padding: 14px 22px 14px 16px;
-  box-shadow: 0 8px 32px rgba(37,211,102,.4), 0 2px 8px rgba(0,0,0,.3);
-  font-size: 14px; font-weight: 700; text-decoration: none;
+  border-radius: 99px; padding: 18px 28px 18px 22px;
+  box-shadow: 0 10px 40px rgba(37,211,102,.45), 0 2px 8px rgba(0,0,0,.3);
+  font-size: 16px; font-weight: 700; text-decoration: none;
   transition: transform .2s, box-shadow .2s;
   animation: wpp-in .5s cubic-bezier(.34,1.56,.64,1) 1s both;
 }
@@ -579,8 +592,10 @@ footer a:hover { color: #fff; }
   .porto-item:first-child { grid-column: span 2; grid-row: span 1; }
   .dd-steps { grid-template-columns: 1fr; }
   .dd-steps-wrap { padding: 28px 22px; }
-  .dd-body { grid-template-columns: 1fr; }
+  .dd-body,
+  #deep-dive-3 .dd-body { grid-template-columns: 1fr; }
   .dd-img { min-height: 240px; }
+  #deep-dive-3 .dd-img-filled img { transform: none; }
 }
 @media (max-width: 600px) {
   .intro-cards { grid-template-columns: 1fr 1fr; }
@@ -606,12 +621,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="../../logo-dronyimagem-2026.png" alt="DronyImagem — Drone Solutions" style="height:96px;width:auto;display:block">
     </a>
     <nav>
-      <a href="#solucoes">Soluções</a>
+      <a href="#experiencia">Experiência</a>
       <a href="#deep-dive">Relatórios TAC</a>
       <a href="#como">Como funciona</a>
       <a href="#faq">Dúvidas</a>
     </nav>
-    <a href="#contato" class="btn-nav">Solicitar orçamento</a>
+    <div class="nav-actions">
+      <a href="https://wa.me/5565999396490?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20mapeamento%20ambiental." class="btn-nav-wpp" target="_blank" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 23.882a.5.5 0 00.614.614l6.058-1.466A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 01-5.006-1.372l-.36-.213-3.733.902.919-3.643-.233-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      </a>
+      <a href="#contato" class="btn-nav">Solicitar orçamento</a>
+    </div>
     <button class="nav-mobile" onclick="document.querySelector('.nav-mobile-menu').classList.toggle('open')">☰</button>
   </div>
 </header>
@@ -644,7 +664,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="hero-check">Interpretação e produção de relatórios técnicos</div>
         </div>
         <div class="hero-btns">
-          <a href="#contato" class="btn btn-outline">Solicitar orçamento</a>
+          <a href="#contato" class="btn btn-green">Solicitar orçamento</a>
         </div>
       </div>
 
@@ -666,67 +686,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ══ SOLUÇÕES ══════════════════════════════════ -->
-<section id="solucoes">
-  <div class="container">
-    <div class="sec-header fi">
-      <div class="section-kicker">Resultados em números</div>
-      <h2>Índices dos<br><em>Trabalhos</em></h2>
-    </div>
-    <div class="indices-stats fi" style="transition-delay:.1s">
-      <div>
-        <div class="stat-n">+<em>1.600</em></div>
-        <div class="stat-l">Hectares mapeados</div>
-      </div>
-      <div>
-        <div class="stat-n"><em>MT / RO / PA / AM</em></div>
-        <div class="stat-l">Estados atendidos</div>
-      </div>
-      <div>
-        <div class="stat-n"><em>24h</em></div>
-        <div class="stat-l">Para retornar seu contato</div>
-      </div>
-    </div>
-    <div class="sol-grid">
-      <div class="sol-item fi" style="transition-delay:.05s">
-        <div class="sol-num">01</div>
-        <div class="sol-content">
-          <h3>Mapeamento de Áreas Degradadas</h3>
-          <p>Identificação precisa de erosões, desmatamentos e áreas críticas. Imagens de alta resolução com coordenadas georreferenciadas prontas para laudos técnicos.</p>
-        </div>
-      </div>
-      <div class="sol-item fi" style="transition-delay:.1s">
-        <div class="sol-num">02</div>
-        <div class="sol-content">
-          <h3>Supressão Vegetal e Licenciamento</h3>
-          <p>Relatórios técnicos completos para processos de licenciamento ambiental junto ao IBAMA, SEMA e IAT. Documentação aceita sem ir e vir.</p>
-        </div>
-      </div>
-      <div class="sol-item fi" style="transition-delay:.15s">
-        <div class="sol-num">03</div>
-        <div class="sol-content">
-          <h3>APP e Reserva Legal</h3>
-          <p>Mapeamento e cálculo automático de Área de Preservação Permanente e Reserva Legal para gestão e regularização junto ao CAR.</p>
-        </div>
-      </div>
-      <div class="sol-item fi" style="transition-delay:.2s">
-        <div class="sol-num">04</div>
-        <div class="sol-content">
-          <h3>Monitoramento Ambiental</h3>
-          <p>Acompanhamento contínuo da vegetação, rios, lagos e áreas sensíveis. Dados inteligentes para planejamento sustentável e tomadas de decisão.</p>
-        </div>
-      </div>
-      <div class="sol-item fi" style="transition-delay:.25s">
-        <div class="sol-num">05</div>
-        <div class="sol-content">
-          <h3>Análises Geoambientais</h3>
-          <p>Dados inteligentes para planejamento sustentável, avaliação de passivos ambientais e tomadas de decisão baseadas em informação real.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -810,7 +769,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dd-eyebrow">
         03
         <span style="opacity:.3">//</span>
-        Constatação de desfolhamento químico com drones de pulverização
+        Constatação de desfolhamento químico em área proibida
       </div>
       <h2>Identificação precisa de<br><em>produto e concentração</em></h2>
       <p class="dd-lead">Mapeamento com plataformas com sensores multiespectrais permitem a constatação de elementos que indicam a utilização de desfolhamento químico em locais proibidos indicando produto e concentração.</p>
@@ -954,7 +913,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="porque-inner">
       <div class="fi">
         <div class="section-kicker">Por que escolher a DronyImagem</div>
-        <h2>Trabalhos ficcionados pela<br><em>excelência técnica</em></h2>
+        <h2>Relatórios com<br><em>excelência técnica</em></h2>
         <p>Cada demanda merece o mesmo rigor técnico comparado com grandes operações tecnológicas. É exatamente a nossa missão entregando produtos de <span class="txt-verde">alta creditação técnica</span>.</p>
         <div class="porque-list">
           <div class="porque-row"><div class="porque-ico">✓</div>Excelência na captura, processamento e entrega de produtos confiáveis</div>
@@ -964,6 +923,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="porque-row"><div class="porque-ico">✓</div>Operações de voo em padrões para creditação pelos Órgãos responsáveis</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIÊNCIA COMPROVADA ════════════════════ -->
+<section id="experiencia">
+  <div class="container">
+    <div class="sec-header fi" style="text-align:center">
+      <div class="section-kicker">Áreas de atuação</div>
+      <h2>Experiência<br><em>Comprovada</em></h2>
+    </div>
+    <div class="indices-stats fi" style="transition-delay:.1s">
+      <div>
+        <div class="stat-n">+<em>1.600</em></div>
+        <div class="stat-l">Hectares mapeados</div>
+      </div>
+      <div>
+        <div class="stat-n"><em>MT / RO / PA / AM</em></div>
+        <div class="stat-l">Estados atendidos</div>
+      </div>
+      <div>
+        <div class="stat-n"><em>24h</em></div>
+        <div class="stat-l">Para retornar seu contato</div>
+      </div>
+    </div>
+    <div class="sol-grid">
+      <a href="#hero" class="sol-item fi" style="transition-delay:.05s">
+        <div class="sol-num">01</div>
+        <div class="sol-content">
+          <h3>Mapeamento de Áreas Degradadas</h3>
+          <p>Identificação de áreas passíveis de recuperação com alta resolução espacial para laudos e relatórios técnicos.</p>
+        </div>
+      </a>
+      <a href="#deep-dive" class="sol-item fi" style="transition-delay:.1s">
+        <div class="sol-num">02</div>
+        <div class="sol-content">
+          <h3>Relatórios para Termos de Ajuste de Conduta (TAC)</h3>
+          <p>Mapas e ortomosaicos para apresentação dos resultados de recuperação de áreas degradadas.</p>
+        </div>
+      </a>
+      <a href="#deep-dive-3" class="sol-item fi" style="transition-delay:.15s">
+        <div class="sol-num">03</div>
+        <div class="sol-content">
+          <h3>Constatação de desfolhamento químico</h3>
+          <p>Sensores multiespectrais para identificação de produto e concentração de defensivos em locais proibidos.</p>
+        </div>
+      </a>
+      <a href="#deep-dive-4" class="sol-item fi" style="transition-delay:.2s">
+        <div class="sol-num">04</div>
+        <div class="sol-content">
+          <h3>Mapas de prescrição para lavouras</h3>
+          <p>Aplicação variável de agrodefensivos baseada em índices vegetativos — economia e sustentabilidade.</p>
+        </div>
+      </a>
+      <a href="#deep-dive-5" class="sol-item fi" style="transition-delay:.25s">
+        <div class="sol-num">05</div>
+        <div class="sol-content">
+          <h3>Constatação de APPs e Reserva Legal</h3>
+          <p>Delimitação precisa de Área de Preservação Permanente e Reserva Legal com geolocalização exata.</p>
+        </div>
+      </a>
+      <a href="#deep-dive-6" class="sol-item fi" style="transition-delay:.3s">
+        <div class="sol-num">06</div>
+        <div class="sol-content">
+          <h3>Supressão vegetal e licenciamentos CGH's/PCH's</h3>
+          <p>Modelagem digital de terreno e superfície via RTK/PPK para licenciamento ambiental.</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1234,7 +1261,7 @@ function enviar() {
 <!-- ══ WPP FLUTUANTE ═══════════════════════════════ -->
 <a href="https://wa.me/5565999396490?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20mapeamento%20ambiental." class="wpp-float" target="_blank" style="position:fixed">
   <div class="wpp-dot"></div>
-  <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 23.882a.5.5 0 00.614.614l6.058-1.466A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 01-5.006-1.372l-.36-.213-3.733.902.919-3.643-.233-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+  <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 23.882a.5.5 0 00.614.614l6.058-1.466A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 01-5.006-1.372l-.36-.213-3.733.902.919-3.643-.233-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
   <div class="wpp-float-txt">
     Falar no WhatsApp
     <small>Respondemos em até 24h</small>
