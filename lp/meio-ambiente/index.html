@@ -92,8 +92,8 @@ nav a:hover { color: #fff; }
 
 /* ── HERO ── */
 #hero {
-  position: relative; min-height: 100vh;
-  display: flex; align-items: center; padding: 164px 0 80px;
+  position: relative;
+  display: flex; align-items: center; padding: 164px 0 32px;
   overflow: hidden; background: #0a0a0a;
 }
 .hero-bg {
@@ -128,9 +128,18 @@ h1 {
   margin-bottom: 22px;
 }
 h1 .verde { color: var(--verde); }
+.hero-subtitle {
+  font-size: 19px; font-weight: 600; line-height: 1.4;
+  color: rgba(255,255,255,.95); margin-bottom: 22px;
+  letter-spacing: -.005em; max-width: 520px;
+}
 .hero-desc {
   font-size: 17px; line-height: 1.75; color: var(--txt-sec);
   max-width: 500px; margin-bottom: 36px;
+}
+.hero-etapas-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--verde); margin-bottom: 14px;
 }
 .hero-checks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
 .hero-check {
@@ -143,7 +152,7 @@ h1 .verde { color: var(--verde); }
   border-radius: 50%; display: grid; place-items: center;
   font-size: 11px; font-weight: 800;
 }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 0; }
 .hero-stats { display: flex; gap: 36px; padding-top: 32px; border-top: 1px solid var(--borda); }
 .stat-n { font-size: 32px; font-weight: 900; letter-spacing: -.03em; color: #fff; line-height: 1; }
 .stat-n em { font-style: normal; color: var(--verde); }
@@ -204,7 +213,26 @@ h2 em { font-style: normal; color: var(--verde); }
 .intro-card p { font-size: 12px; color: var(--txt-sec); line-height: 1.5; }
 
 /* ── SEÇÃO: SOLUÇÕES ── */
-#solucoes { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
+#solucoes { padding: 16px 0 80px; background: #0a0a0a; }
+.indices-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 16px; padding: 32px 36px;
+  margin-bottom: 52px;
+}
+.indices-stats > div { padding: 0; }
+.indices-stats > div:nth-child(2) { margin-left: -64px; }
+.indices-stats .stat-n {
+  font-size: clamp(28px, 3vw, 38px); font-weight: 900;
+  letter-spacing: -.03em; color: #fff; line-height: 1.1;
+}
+.indices-stats .stat-n em { font-style: normal; color: var(--verde); }
+.indices-stats .stat-l {
+  font-size: 13px; color: var(--txt-sec); margin-top: 8px;
+}
+@media (max-width: 720px) {
+  .indices-stats { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
+}
 .sec-header { margin-bottom: 52px; }
 .sol-grid { display: flex; flex-direction: column; gap: 16px; }
 .sol-item {
@@ -225,15 +253,138 @@ h2 em { font-style: normal; color: var(--verde); }
 .sol-content h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
 .sol-content p { font-size: 14px; color: var(--txt-sec); line-height: 1.65; }
 
+/* ── SEÇÃO: DEEP DIVE — ÁREAS DEGRADADAS ── */
+#deep-dive { padding: 96px 0; background: var(--cinza-1); border-top: 1px solid var(--borda); }
+.dd-header { margin-bottom: 52px; max-width: 760px; }
+.dd-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--verde); margin-bottom: 16px;
+}
+.dd-eyebrow span { color: var(--txt-sec); }
+.dd-lead {
+  font-size: 17px; color: var(--txt-sec); line-height: 1.75;
+  border-left: 2px solid var(--verde); padding-left: 18px; margin-top: 14px;
+}
+.dd-steps-wrap {
+  background: var(--cinza-2); border: 1px solid var(--borda);
+  border-radius: 16px; padding: 40px 36px;
+}
+.dd-steps-title {
+  font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--verde); margin-bottom: 28px;
+}
+.dd-steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.dd-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  align-items: stretch;
+}
+.dd-body .dd-steps-wrap { padding: 32px 28px; }
+.dd-body .dd-steps { grid-template-columns: 1fr; }
+.dd-img {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0,200,150,.08) 0%, rgba(10,10,10,.6) 100%);
+  border: 1px dashed rgba(0,200,150,.22);
+  border-radius: 16px;
+  min-height: 360px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  font-size: 14px; color: rgba(255,255,255,.42); text-align: center; padding: 24px;
+  overflow: hidden;
+}
+.dd-img-ico { font-size: 44px; opacity: .55; }
+.dd-img small { font-size: 11px; color: rgba(255,255,255,.28); letter-spacing: .04em; }
+.dd-img-filled {
+  padding: 0; background: var(--cinza-2);
+  border: 1px solid var(--borda); overflow: hidden;
+  display: block; min-height: 360px; position: relative;
+}
+.dd-img-filled img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.dd-img-bg {
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+.dd-img-stack {
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 360px; padding: 0; border: none; background: transparent;
+}
+.dd-img-stack img {
+  flex: 1 1 0; width: 100%; min-height: 180px;
+  object-fit: cover; border-radius: 14px;
+  border: 1px solid var(--borda); background: var(--cinza-2);
+  display: block;
+}
+
+/* ── SEÇÃO: DEEP DIVE 03 ── */
+#deep-dive-3 { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
+#deep-dive-3 .dd-body { grid-template-columns: 1.5fr 1fr; }
+#deep-dive-3 .dd-img-filled { border: none; }
+#deep-dive-3 .dd-img-filled img {
+  object-position: center top;
+  transform: scale(1.04);
+  transform-origin: top;
+}
+
+/* ── SEÇÃO: DEEP DIVE 04 ── */
+#deep-dive-4 { padding: 96px 0; background: var(--cinza-1); border-top: 1px solid var(--borda); }
+.dd-mapa-wrap {
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--cinza-2);
+  margin-bottom: 24px;
+}
+.dd-mapa-wrap img { width: 100%; height: auto; display: block; }
+
+/* ── SEÇÃO: DEEP DIVE 05 ── */
+#deep-dive-5 { padding: 96px 0; background: #0a0a0a; border-top: 1px solid var(--borda); }
+
+/* ── SEÇÃO: DEEP DIVE 06 ── */
+#deep-dive-6 { padding: 96px 0; background: var(--cinza-1); border-top: 1px solid var(--borda); }
+.dd-deliverables {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px;
+  margin-top: 22px; max-width: 760px;
+}
+.dd-deliverable {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: rgba(255,255,255,.78);
+}
+.dd-deliverable::before {
+  content: '→'; color: var(--verde); font-weight: 700; flex-shrink: 0;
+}
+@media (max-width: 720px) {
+  .dd-deliverables { grid-template-columns: 1fr; }
+}
+.dd-step {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 18px; background: rgba(255,255,255,.02);
+  border: 1px solid var(--borda); border-radius: 10px;
+  transition: border-color .2s, background .2s;
+}
+.dd-step:hover { border-color: rgba(0,200,150,.3); background: rgba(0,200,150,.04); }
+.dd-step-n {
+  width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%;
+  background: rgba(0,200,150,.12); color: var(--verde);
+  display: grid; place-items: center;
+  font-size: 12px; font-weight: 800;
+  border: 1px solid rgba(0,200,150,.25);
+}
+.dd-step-t { font-size: 14px; font-weight: 600; line-height: 1.45; color: rgba(255,255,255,.88); padding-top: 4px; }
+
 /* ── SEÇÃO: POR QUE NÓS ── */
 #porque { padding: 96px 0; background: var(--cinza-1); border-top: 1px solid var(--borda); }
-.porque-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-.porque-text h2 { margin-bottom: 16px; }
-.porque-text p { font-size: 16px; color: var(--txt-sec); line-height: 1.75; margin-bottom: 32px; }
-.porque-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.porque-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.porque-inner h2 { margin-bottom: 18px; }
+.porque-inner > .fi > p { font-size: 17px; color: var(--txt-sec); line-height: 1.75; margin-bottom: 36px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.txt-verde { color: var(--verde); font-weight: 600; }
+.porque-list { display: flex; flex-direction: column; gap: 12px; margin: 0 auto; max-width: 640px; text-align: left; }
 .porque-row {
   display: flex; align-items: center; gap: 14px;
-  padding: 16px 18px; background: var(--cinza-2);
+  padding: 16px 20px; background: var(--cinza-2);
   border: 1px solid var(--borda); border-radius: 10px;
   font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85);
   transition: border-color .2s;
@@ -243,31 +394,6 @@ h2 em { font-style: normal; color: var(--verde); }
   width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%;
   background: rgba(0,200,150,.12); display: grid; place-items: center;
   font-size: 14px;
-}
-.compare {
-  background: var(--cinza-2); border: 1px solid var(--borda);
-  border-radius: 14px; overflow: hidden;
-}
-.compare-head {
-  background: var(--cinza-3); padding: 16px 24px;
-  font-size: 11px; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--txt-sec);
-  display: grid; grid-template-columns: 1fr 80px 1fr; text-align: center;
-}
-.compare-head span:first-child { text-align: left; }
-.compare-head span:last-child { text-align: right; color: var(--verde); }
-.compare-row {
-  display: grid; grid-template-columns: 1fr 80px 1fr;
-  align-items: center; padding: 14px 24px;
-  border-top: 1px solid var(--borda); font-size: 13px;
-}
-.compare-row:last-child { border-bottom: none; }
-.c-eles { color: rgba(255,255,255,.28); }
-.c-nos { color: var(--verde); font-weight: 600; text-align: right; }
-.c-vs {
-  font-size: 10px; font-weight: 700; letter-spacing: .1em;
-  color: rgba(255,255,255,.18); text-align: center;
-  text-transform: uppercase;
 }
 
 /* ── SEÇÃO: COMO FUNCIONA ── */
@@ -450,6 +576,10 @@ footer a:hover { color: #fff; }
   .nav-mobile { display: block; font-size: 22px; cursor: pointer; color: #fff; background: none; border: none; }
   .porto-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 190px); }
   .porto-item:first-child { grid-column: span 2; grid-row: span 1; }
+  .dd-steps { grid-template-columns: 1fr; }
+  .dd-steps-wrap { padding: 28px 22px; }
+  .dd-body { grid-template-columns: 1fr; }
+  .dd-img { min-height: 240px; }
 }
 @media (max-width: 600px) {
   .intro-cards { grid-template-columns: 1fr 1fr; }
@@ -476,8 +606,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <nav>
       <a href="#solucoes">Soluções</a>
+      <a href="#deep-dive">Relatórios TAC</a>
       <a href="#como">Como funciona</a>
-      <a href="#portfolio">Portfólio</a>
       <a href="#faq">Dúvidas</a>
     </nav>
     <a href="#contato" class="btn-nav">Solicitar orçamento</a>
@@ -496,55 +626,106 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="breadcrumb">
           <span>01</span>
           <span style="opacity:.3">//</span>
-          <span>Meio Ambiente</span>
+          <span>Mapeamento de Áreas Degradadas</span>
         </div>
         <div class="hero-kicker">DronyImagem — Mapeamento Ambiental</div>
-        <h1>MEIO<br>AMBIENTE</h1>
-        <p class="hero-desc">A gente vai até a sua área, voa com o drone, processa as imagens e entrega o laudo que o órgão ambiental pede — em dias, não em semanas.</p>
+        <h1>MAPEAMENTO<br>DE ÁREAS<br><span class="verde">DEGRADADAS</span></h1>
+        <div class="hero-subtitle">Identificação de áreas passíveis de recuperação</div>
+        <p class="hero-desc">As áreas passíveis de recuperação necessitam de um mapeamento com alta resolução espacial, aumentando a precisão e diminuindo os erros residuais calculados por imagens de satélite.</p>
+        <div class="hero-etapas-label">Etapas do processo</div>
         <div class="hero-checks">
-          <div class="hero-check">Mapeamento de áreas degradadas</div>
-          <div class="hero-check">Supressão vegetal e licenciamento</div>
-          <div class="hero-check">APP e Reserva Legal</div>
-          <div class="hero-check">Relatório técnico aceito pelo órgão</div>
-          <div class="hero-check">Atendemos pequenos e médios produtores</div>
+          <div class="hero-check">Planejamento de voo</div>
+          <div class="hero-check">Obtenção de autorização de voo</div>
+          <div class="hero-check">Mapeamento com coleta de imagens</div>
+          <div class="hero-check">Armazenamento e tratamento prévio das câmeras</div>
+          <div class="hero-check">Geração de ortomosaicos</div>
+          <div class="hero-check">Tratamento de produtos imageados</div>
+          <div class="hero-check">Interpretação e produção de relatórios técnicos</div>
         </div>
         <div class="hero-btns">
           <a href="#contato" class="btn btn-outline">Solicitar orçamento</a>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <div class="stat-n">+<em>50</em></div>
-            <div class="stat-l">Áreas mapeadas</div>
-          </div>
-          <div>
-            <div class="stat-n"><em>MT</em></div>
-            <div class="stat-l">Mato Grosso</div>
-          </div>
-          <div>
-            <div class="stat-n"><em>24h</em></div>
-            <div class="stat-l">Para retornar seu contato</div>
-          </div>
         </div>
       </div>
 
       <div class="fi" style="transition-delay:.2s">
         <div class="hero-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop"
-            alt="Floresta vista de cima — mapeamento ambiental com drone"
+            src="../../img/section01.jpeg"
+            alt="Mapeamento de áreas degradadas com drone — DronyImagem"
             loading="eager"
           >
           <div class="hero-img-tag">DRONYIMAGEM</div>
           <div class="hero-img-badge">
             <div class="badge-dot"></div>
             <div class="badge-txt">
-              Operação ativa
-              <span>Drone homologado ANAC</span>
+              Operação segura
+              <span>Voos autorizados pela SARPAS</span>
             </div>
           </div>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUÇÕES ══════════════════════════════════ -->
+<section id="solucoes">
+  <div class="container">
+    <div class="sec-header fi">
+      <div class="section-kicker">Resultados em números</div>
+      <h2>Índices dos<br><em>Trabalhos</em></h2>
+    </div>
+    <div class="indices-stats fi" style="transition-delay:.1s">
+      <div>
+        <div class="stat-n">+<em>1.600</em></div>
+        <div class="stat-l">Hectares mapeados</div>
+      </div>
+      <div>
+        <div class="stat-n"><em>MT / RO / PA / AM</em></div>
+        <div class="stat-l">Estados atendidos</div>
+      </div>
+      <div>
+        <div class="stat-n"><em>24h</em></div>
+        <div class="stat-l">Para retornar seu contato</div>
+      </div>
+    </div>
+    <div class="sol-grid">
+      <div class="sol-item fi" style="transition-delay:.05s">
+        <div class="sol-num">01</div>
+        <div class="sol-content">
+          <h3>Mapeamento de Áreas Degradadas</h3>
+          <p>Identificação precisa de erosões, desmatamentos e áreas críticas. Imagens de alta resolução com coordenadas georreferenciadas prontas para laudos técnicos.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.1s">
+        <div class="sol-num">02</div>
+        <div class="sol-content">
+          <h3>Supressão Vegetal e Licenciamento</h3>
+          <p>Relatórios técnicos completos para processos de licenciamento ambiental junto ao IBAMA, SEMA e IAT. Documentação aceita sem ir e vir.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.15s">
+        <div class="sol-num">03</div>
+        <div class="sol-content">
+          <h3>APP e Reserva Legal</h3>
+          <p>Mapeamento e cálculo automático de Área de Preservação Permanente e Reserva Legal para gestão e regularização junto ao CAR.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.2s">
+        <div class="sol-num">04</div>
+        <div class="sol-content">
+          <h3>Monitoramento Ambiental</h3>
+          <p>Acompanhamento contínuo da vegetação, rios, lagos e áreas sensíveis. Dados inteligentes para planejamento sustentável e tomadas de decisão.</p>
+        </div>
+      </div>
+      <div class="sol-item fi" style="transition-delay:.25s">
+        <div class="sol-num">05</div>
+        <div class="sol-content">
+          <h3>Análises Geoambientais</h3>
+          <p>Dados inteligentes para planejamento sustentável, avaliação de passivos ambientais e tomadas de decisão baseadas em informação real.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -587,47 +768,179 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ══ SOLUÇÕES ══════════════════════════════════ -->
-<section id="solucoes">
+<!-- ══ DEEP DIVE — RELATÓRIOS TAC ═════════════════ -->
+<section id="deep-dive">
   <div class="container">
-    <div class="sec-header fi">
-      <div class="section-kicker">Nossas soluções ambientais</div>
-      <h2>O que a gente<br><em>faz por você</em></h2>
+    <div class="dd-header fi">
+      <div class="dd-eyebrow">
+        02
+        <span style="opacity:.3">//</span>
+        Relatórios para Termos de Ajuste de Conduta (TAC)
+      </div>
+      <h2>Mapas para apresentação de resultados de<br><em>Recuperação de Áreas Degradadas</em></h2>
+      <p class="dd-lead">Os Projetos de Recuperação de Áreas Degradadas exigem relatórios periódicos da evolução dos resultados a partir do replantio e condução de espécies remanescentes, o que pode ser melhor apresentado a partir de ortomosaicos a partir de ortofotos capturadas por nossos drones.</p>
     </div>
-    <div class="sol-grid">
-      <div class="sol-item fi" style="transition-delay:.05s">
-        <div class="sol-num">01</div>
-        <div class="sol-content">
-          <h3>Mapeamento de Áreas Degradadas</h3>
-          <p>Identificação precisa de erosões, desmatamentos e áreas críticas. Imagens de alta resolução com coordenadas georreferenciadas prontas para laudos técnicos.</p>
+
+    <div class="dd-body">
+      <div class="dd-steps-wrap fi" style="transition-delay:.05s">
+        <div class="dd-steps-title">Etapas do processo</div>
+        <div class="dd-steps">
+          <div class="dd-step"><div class="dd-step-n">1</div><div class="dd-step-t">Planejamento de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">2</div><div class="dd-step-t">Obtenção de autorização de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">3</div><div class="dd-step-t">Mapeamento com coleta de imagens</div></div>
+          <div class="dd-step"><div class="dd-step-n">4</div><div class="dd-step-t">Armazenamento e tratamento prévio das câmeras</div></div>
+          <div class="dd-step"><div class="dd-step-n">5</div><div class="dd-step-t">Geração de ortomosaicos</div></div>
+          <div class="dd-step"><div class="dd-step-n">6</div><div class="dd-step-t">Quantificação de área recuperada</div></div>
+          <div class="dd-step"><div class="dd-step-n">7</div><div class="dd-step-t">Geração de mapas temáticos e relatórios técnicos</div></div>
         </div>
       </div>
-      <div class="sol-item fi" style="transition-delay:.1s">
-        <div class="sol-num">02</div>
-        <div class="sol-content">
-          <h3>Supressão Vegetal e Licenciamento</h3>
-          <p>Relatórios técnicos completos para processos de licenciamento ambiental junto ao IBAMA, SEMA e IAT. Documentação aceita sem ir e vir.</p>
+      <div class="dd-img dd-img-stack fi" style="transition-delay:.15s">
+        <img src="../../img/section02.jpeg" alt="Mapa para relatórios TAC — DronyImagem">
+        <img src="../../img/section02maptransparent.png" alt="Ortomosaico temático — DronyImagem">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEEP DIVE — DESFOLHAMENTO QUÍMICO ══════════ -->
+<section id="deep-dive-3">
+  <div class="container">
+    <div class="dd-header fi">
+      <div class="dd-eyebrow">
+        03
+        <span style="opacity:.3">//</span>
+        Constatação de desfolhamento químico com drones de pulverização
+      </div>
+      <h2>Identificação precisa de<br><em>produto e concentração</em></h2>
+      <p class="dd-lead">Mapeamento com plataformas com sensores multiespectrais permitem a constatação de elementos que indicam a utilização de desfolhamento químico em locais proibidos indicando produto e concentração.</p>
+    </div>
+
+    <div class="dd-body">
+      <div class="dd-img dd-img-filled fi" style="transition-delay:.05s">
+        <img src="../../img/section03.jpeg" alt="Análise multiespectral — desfolhamento químico">
+      </div>
+      <div class="dd-steps-wrap fi" style="transition-delay:.15s">
+        <div class="dd-steps-title">Etapas do processo</div>
+        <div class="dd-steps">
+          <div class="dd-step"><div class="dd-step-n">1</div><div class="dd-step-t">Planejamento de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">2</div><div class="dd-step-t">Obtenção de autorização de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">3</div><div class="dd-step-t">Mapeamento com coleta de imagens espectrais</div></div>
+          <div class="dd-step"><div class="dd-step-n">4</div><div class="dd-step-t">Armazenamento e tratamento prévio das câmeras</div></div>
+          <div class="dd-step"><div class="dd-step-n">5</div><div class="dd-step-t">Geração de ortomosaicos</div></div>
+          <div class="dd-step"><div class="dd-step-n">6</div><div class="dd-step-t">Estabelecimento de Índices Vegetativos apropriados</div></div>
+          <div class="dd-step"><div class="dd-step-n">7</div><div class="dd-step-t">Análise de produtos gerados pelo imageamento</div></div>
+          <div class="dd-step"><div class="dd-step-n">8</div><div class="dd-step-t">Elaboração de Relatórios Técnicos</div></div>
         </div>
       </div>
-      <div class="sol-item fi" style="transition-delay:.15s">
-        <div class="sol-num">03</div>
-        <div class="sol-content">
-          <h3>APP e Reserva Legal</h3>
-          <p>Mapeamento e cálculo automático de Área de Preservação Permanente e Reserva Legal para gestão e regularização junto ao CAR.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEEP DIVE — MAPAS DE PRESCRIÇÃO ════════════ -->
+<section id="deep-dive-4">
+  <div class="container">
+    <div class="dd-header fi">
+      <div class="dd-eyebrow">
+        04
+        <span style="opacity:.3">//</span>
+        Mapas de prescrição para lavouras
+      </div>
+      <h2>Aplicação variável<br><em>e sustentável</em></h2>
+      <p class="dd-lead">Os nossos drones com sensores multiespectrais obtém múltiplas fotos de um mesmo ponto geográfico permitindo a análise de Índices Vegetativos e a prescrição de concentrações variadas de aplicação de agrodefensivos de modo econômico e sustentável.</p>
+    </div>
+
+    <div class="dd-mapa-wrap fi" style="transition-delay:.05s">
+      <img src="../../img/section04.jpeg" alt="Mapa de prescrição para lavouras — DronyImagem">
+    </div>
+
+    <div class="dd-steps-wrap fi" style="transition-delay:.15s">
+      <div class="dd-steps-title">Etapas do processo</div>
+      <div class="dd-steps">
+        <div class="dd-step"><div class="dd-step-n">1</div><div class="dd-step-t">Planejamento de voo</div></div>
+        <div class="dd-step"><div class="dd-step-n">2</div><div class="dd-step-t">Obtenção de autorização de voo</div></div>
+        <div class="dd-step"><div class="dd-step-n">3</div><div class="dd-step-t">Mapeamento com coleta de imagens espectrais</div></div>
+        <div class="dd-step"><div class="dd-step-n">4</div><div class="dd-step-t">Armazenamento das imagens capturadas</div></div>
+        <div class="dd-step"><div class="dd-step-n">5</div><div class="dd-step-t">Geração de ortomosaicos temáticos</div></div>
+        <div class="dd-step"><div class="dd-step-n">6</div><div class="dd-step-t">Estabelecimento de Índices Vegetativos apropriados</div></div>
+        <div class="dd-step"><div class="dd-step-n">7</div><div class="dd-step-t">Análise de produtos gerados pelo imageamento</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEEP DIVE — APPs E RESERVA LEGAL ══════════ -->
+<section id="deep-dive-5">
+  <div class="container">
+    <div class="dd-header fi">
+      <div class="dd-eyebrow">
+        05
+        <span style="opacity:.3">//</span>
+        Constatação de APPs e Reserva Legal
+      </div>
+      <h2>Delimitação precisa de<br><em>APP e Reserva Legal</em></h2>
+      <p class="dd-lead">A utilização de drones de alta resolução e acurácia posicional permitem a geolocalização exata das feições de cursos hídricos e lâmina d'água de represas e reservatórios naturais permitindo o cálculo justo e exato da faixa de APP a ser preservada bem como a delimitação de Áreas de Reserva Legal.</p>
+    </div>
+
+    <div class="dd-body">
+      <div class="dd-steps-wrap fi" style="transition-delay:.05s">
+        <div class="dd-steps-title">Etapas do processo</div>
+        <div class="dd-steps">
+          <div class="dd-step"><div class="dd-step-n">1</div><div class="dd-step-t">Planejamento de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">2</div><div class="dd-step-t">Obtenção de autorização de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">3</div><div class="dd-step-t">Mapeamento de reconhecimento da área</div></div>
+          <div class="dd-step"><div class="dd-step-n">4</div><div class="dd-step-t">Obtenção de pontos de controle e marcação in loco dos pontos conhecidos com GPS</div></div>
+          <div class="dd-step"><div class="dd-step-n">5</div><div class="dd-step-t">Mapeamento com coleta de imagens RGB</div></div>
+          <div class="dd-step"><div class="dd-step-n">6</div><div class="dd-step-t">Armazenamento das imagens capturadas</div></div>
+          <div class="dd-step"><div class="dd-step-n">7</div><div class="dd-step-t">Geração de ortomosaicos temáticos</div></div>
+          <div class="dd-step"><div class="dd-step-n">8</div><div class="dd-step-t">Análise de produtos gerados pelo imageamento com observação de parâmetros residuais aceitáveis pela proposta</div></div>
+          <div class="dd-step"><div class="dd-step-n">9</div><div class="dd-step-t">Geração de mapas resultados do processamento</div></div>
         </div>
       </div>
-      <div class="sol-item fi" style="transition-delay:.2s">
-        <div class="sol-num">04</div>
-        <div class="sol-content">
-          <h3>Monitoramento Ambiental</h3>
-          <p>Acompanhamento contínuo da vegetação, rios, lagos e áreas sensíveis. Dados inteligentes para planejamento sustentável e tomadas de decisão.</p>
-        </div>
+      <div class="dd-img dd-img-filled fi" style="transition-delay:.15s">
+        <img src="../../img/section05.jpeg" alt="Constatação de APPs e Reserva Legal — DronyImagem">
       </div>
-      <div class="sol-item fi" style="transition-delay:.25s">
-        <div class="sol-num">05</div>
-        <div class="sol-content">
-          <h3>Análises Geoambientais</h3>
-          <p>Dados inteligentes para planejamento sustentável, avaliação de passivos ambientais e tomadas de decisão baseadas em informação real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEEP DIVE — CGH's / PCH's ═════════════════ -->
+<section id="deep-dive-6">
+  <div class="container">
+    <div class="dd-header fi">
+      <div class="dd-eyebrow">
+        06
+        <span style="opacity:.3">//</span>
+        Supressão vegetal e licenciamentos para CGH's / PCH's
+      </div>
+      <h2>Modelagem digital de<br><em>terreno e superfície</em></h2>
+      <p class="dd-lead">Através da utilização de drones com sistema de posicionamento RTK/PPK são possíveis obtenção de imagens para:</p>
+      <div class="dd-deliverables">
+        <div class="dd-deliverable">Modelos Digitais do Terreno</div>
+        <div class="dd-deliverable">Modelos Digitais de Superfície</div>
+        <div class="dd-deliverable">Curvas de nível</div>
+        <div class="dd-deliverable">Perfis longitudinais e transversais</div>
+        <div class="dd-deliverable">Cálculos de volumes de corte e aterro</div>
+        <div class="dd-deliverable">Avaliação de acessos à área</div>
+      </div>
+    </div>
+
+    <div class="dd-body">
+      <div class="dd-img dd-img-stack fi" style="transition-delay:.05s">
+        <img src="../../img/section06.jpeg" alt="Modelo digital de terreno (MDT) — DronyImagem">
+        <img src="../../img/section06-2.jpeg" alt="Modelo digital de superfície (MDS) — DronyImagem">
+      </div>
+      <div class="dd-steps-wrap fi" style="transition-delay:.15s">
+        <div class="dd-steps-title">Etapas do processo</div>
+        <div class="dd-steps">
+          <div class="dd-step"><div class="dd-step-n">1</div><div class="dd-step-t">Planejamento de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">2</div><div class="dd-step-t">Obtenção de autorização de voo</div></div>
+          <div class="dd-step"><div class="dd-step-n">3</div><div class="dd-step-t">Mapeamento de reconhecimento da área</div></div>
+          <div class="dd-step"><div class="dd-step-n">4</div><div class="dd-step-t">Obtenção de pontos de controle para eventuais correções</div></div>
+          <div class="dd-step"><div class="dd-step-n">5</div><div class="dd-step-t">Mapeamento com coleta de imagens multiespectrais</div></div>
+          <div class="dd-step"><div class="dd-step-n">6</div><div class="dd-step-t">Armazenamento das imagens capturadas</div></div>
+          <div class="dd-step"><div class="dd-step-n">7</div><div class="dd-step-t">Geração de ortomosaicos temáticos e MDT's</div></div>
+          <div class="dd-step"><div class="dd-step-n">8</div><div class="dd-step-t">Análise de produtos gerados pelo imageamento com observação de parâmetros residuais aceitáveis pela proposta</div></div>
+          <div class="dd-step"><div class="dd-step-n">9</div><div class="dd-step-t">Geração de mapas resultados do processamento</div></div>
         </div>
       </div>
     </div>
@@ -640,50 +953,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="porque-inner">
       <div class="fi">
         <div class="section-kicker">Por que escolher a DronyImagem</div>
-        <h2>Atendemos quem<br>os grandes<br><em>ignoram</em></h2>
-        <p>Médios e pequenos produtores merecem o mesmo rigor técnico das grandes operações. É exatamente isso que entregamos — com preço justo e atendimento direto.</p>
+        <h2>Trabalhos ficcionados pela<br><em>excelência técnica</em></h2>
+        <p>Cada demanda merece o mesmo rigor técnico comparado com grandes operações tecnológicas. É exatamente a nossa missão entregando produtos de <span class="txt-verde">alta creditação técnica</span>.</p>
         <div class="porque-list">
-          <div class="porque-row"><div class="porque-ico">✓</div>Foco em pequenos e médios produtores rurais</div>
-          <div class="porque-row"><div class="porque-ico">✓</div>Relatório aceito por IBAMA, SEMA e IAT</div>
-          <div class="porque-row"><div class="porque-ico">✓</div>Cobertura em Mato Grosso — MT</div>
-          <div class="porque-row"><div class="porque-ico">✓</div>Sem intermediários — equipe própria em campo</div>
-          <div class="porque-row"><div class="porque-ico">✓</div>Retorno em até 24h após o contato</div>
-          <div class="porque-row"><div class="porque-ico">✓</div>Drone homologado ANAC, operação 100% legal</div>
-        </div>
-      </div>
-
-      <div class="fi" style="transition-delay:.15s">
-        <div class="compare">
-          <div class="compare-head">
-            <span>Concorrentes</span>
-            <span>VS</span>
-            <span>DronyImagem</span>
-          </div>
-          <div class="compare-row">
-            <span class="c-eles">Só grandes áreas</span>
-            <span class="c-vs">PORTE</span>
-            <span class="c-nos">Pequenos e médios ✓</span>
-          </div>
-          <div class="compare-row">
-            <span class="c-eles">Brasília / nacional</span>
-            <span class="c-vs">REGIÃO</span>
-            <span class="c-nos">Mato Grosso — MT ✓</span>
-          </div>
-          <div class="compare-row">
-            <span class="c-eles">Semanas de espera</span>
-            <span class="c-vs">PRAZO</span>
-            <span class="c-nos">Resposta em 24h ✓</span>
-          </div>
-          <div class="compare-row">
-            <span class="c-eles">Foco urbano</span>
-            <span class="c-vs">FOCO</span>
-            <span class="c-nos">100% rural e ambiental ✓</span>
-          </div>
-          <div class="compare-row">
-            <span class="c-eles">Intermediários</span>
-            <span class="c-vs">ATEND.</span>
-            <span class="c-nos">Equipe direta ✓</span>
-          </div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Excelência na captura, processamento e entrega de produtos confiáveis</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Relatórios Técnicos gerados com rigor técnico</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Atendimento em MT / RO / PA / AM</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Equipe própria em campo, sem intermediários</div>
+          <div class="porque-row"><div class="porque-ico">✓</div>Operações de voo em padrões para creditação pelos Órgãos responsáveis</div>
         </div>
       </div>
     </div>
@@ -804,7 +1081,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           Vocês atendem minha região?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Atendemos principalmente Mato Grosso — MT. Em caso de dúvida, chama a gente no WhatsApp que a gente verifica e te responde na hora.</div>
+        <div class="faq-a">Atendemos Mato Grosso (MT), Rondônia (RO), Pará (PA) e Amazonas (AM). Em caso de dúvida sobre a sua região, chama a gente no WhatsApp que a gente verifica e te responde na hora.</div>
       </div>
       <div class="faq-item fi" style="transition-delay:.05s">
         <div class="faq-q" onclick="faq(this)">
@@ -856,8 +1133,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="cta-selos">
           <div class="cta-selo"><strong>✓</strong> Retorno em até 24 horas</div>
           <div class="cta-selo"><strong>✓</strong> Sem compromisso de contratação</div>
-          <div class="cta-selo"><strong>✓</strong> Drone homologado ANAC</div>
-          <div class="cta-selo"><strong>✓</strong> Atendemos Mato Grosso — MT</div>
+          <div class="cta-selo"><strong>✓</strong> Voos autorizados pela SARPAS</div>
+          <div class="cta-selo"><strong>✓</strong> Atendemos MT, RO, PA e AM</div>
         </div>
       </div>
       <div class="cta-right">
@@ -876,6 +1153,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <select id="estado">
             <option value="" disabled selected>Onde fica a propriedade?</option>
             <option>MT — Mato Grosso</option>
+            <option>RO — Rondônia</option>
+            <option>PA — Pará</option>
+            <option>AM — Amazonas</option>
             <option>Outra região</option>
           </select>
         </div>
