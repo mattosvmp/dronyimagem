@@ -1,15 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-53GV2BVG');</script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-53GV2BVG");
+    </script>
     <!-- End Google Tag Manager -->
 
     <script
@@ -75,7 +82,9 @@
         margin-top: 24px;
         text-align: center;
       }
-      .hero-solutions-dropdown[open] { z-index: 25; }
+      .hero-solutions-dropdown[open] {
+        z-index: 25;
+      }
       .hero-solutions-toggle {
         list-style: none;
         cursor: pointer;
@@ -91,12 +100,24 @@
         font-weight: 600;
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
-        transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        transition:
+          background-color 0.25s ease,
+          border-color 0.25s ease,
+          color 0.25s ease,
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
         user-select: none;
       }
-      .hero-solutions-toggle::-webkit-details-marker { display: none; }
-      .hero-solutions-toggle::marker { content: ""; font-size: 0; }
-      .hero-solutions-toggle::before { content: none !important; }
+      .hero-solutions-toggle::-webkit-details-marker {
+        display: none;
+      }
+      .hero-solutions-toggle::marker {
+        content: "";
+        font-size: 0;
+      }
+      .hero-solutions-toggle::before {
+        content: none !important;
+      }
       .hero-solutions-toggle .icon-grid {
         width: 16px;
         height: 16px;
@@ -136,12 +157,20 @@
         border-radius: 16px;
         padding: 8px;
         text-align: left;
-        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 138, 0, 0.06);
+        box-shadow:
+          0 24px 70px rgba(0, 0, 0, 0.65),
+          0 0 0 1px rgba(255, 138, 0, 0.06);
         animation: heroPanelIn 0.22s ease;
       }
       @keyframes heroPanelIn {
-        from { opacity: 0; transform: translateY(-6px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       .hero-solution-item {
         display: flex !important;
@@ -150,7 +179,9 @@
         padding: 12px 14px;
         border-radius: 11px;
         color: #e0e0e0;
-        transition: background-color 0.2s ease, transform 0.2s ease;
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease;
         text-decoration: none;
       }
       .hero-solution-item + .hero-solution-item {
@@ -167,7 +198,11 @@
         width: 36px;
         height: 36px;
         border-radius: 9px;
-        background: linear-gradient(135deg, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0.12));
+        background: linear-gradient(
+          135deg,
+          rgba(255, 138, 0, 0.28),
+          rgba(255, 138, 0, 0.12)
+        );
         color: var(--accent-color);
         font-size: 0.82rem;
         font-weight: 800;
@@ -196,7 +231,9 @@
         color: #555;
         font-size: 1.1rem;
         line-height: 1;
-        transition: color 0.2s ease, transform 0.2s ease;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
         flex-shrink: 0;
       }
       .hero-solution-item:hover .arrow {
@@ -214,8 +251,14 @@
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53GV2BVG"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-53GV2BVG"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <header class="main-header">
       <div class="container header-container">
@@ -356,48 +399,36 @@
 
         <details class="hero-solutions-dropdown">
           <summary class="hero-solutions-toggle">
-            <svg class="icon-grid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM152 248c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm120-24c0 13.3-10.7 24-24 24s-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24zm48 24c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg>
-            <span data-translate-key="heroSolToggle">Ver todas as soluções</span>
+            <svg
+              class="icon-grid"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM152 248c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm120-24c0 13.3-10.7 24-24 24s-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24zm48 24c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"
+              />
+            </svg>
+            <span data-translate-key="heroSolToggle"
+              >Ver todas as soluções</span
+            >
             <span class="chevron" aria-hidden="true">▾</span>
           </summary>
           <div class="hero-solutions-panel" role="menu">
-            <a href="lp/1/" class="hero-solution-item" role="menuitem">
+            <a
+              href="lp/meio-ambiente/"
+              class="hero-solution-item"
+              role="menuitem"
+            >
               <span class="num">01</span>
               <div class="info">
-                <span class="title" data-translate-key="heroSol1Title">Meio Ambiente</span>
-                <span class="desc" data-translate-key="heroSol1Desc">Monitoramento, APP e licenciamento</span>
-              </div>
-              <span class="arrow" aria-hidden="true">›</span>
-            </a>
-            <a href="lp/2/" class="hero-solution-item" role="menuitem">
-              <span class="num">02</span>
-              <div class="info">
-                <span class="title" data-translate-key="heroSol2Title">Agricultura de Precisão</span>
-                <span class="desc" data-translate-key="heroSol2Desc">NDVI e gestão de lavouras</span>
-              </div>
-              <span class="arrow" aria-hidden="true">›</span>
-            </a>
-            <a href="lp/3/" class="hero-solution-item" role="menuitem">
-              <span class="num">03</span>
-              <div class="info">
-                <span class="title" data-translate-key="heroSol3Title">Agricultura — Detalhada</span>
-                <span class="desc" data-translate-key="heroSol3Desc">RTK, multiespectrais e índices avançados</span>
-              </div>
-              <span class="arrow" aria-hidden="true">›</span>
-            </a>
-            <a href="lp/4/" class="hero-solution-item" role="menuitem">
-              <span class="num">04</span>
-              <div class="info">
-                <span class="title" data-translate-key="heroSol4Title">Meio Ambiente — Detalhada</span>
-                <span class="desc" data-translate-key="heroSol4Desc">Queimadas, recursos hídricos e fauna</span>
-              </div>
-              <span class="arrow" aria-hidden="true">›</span>
-            </a>
-            <a href="lp/5/" class="hero-solution-item" role="menuitem">
-              <span class="num">05</span>
-              <div class="info">
-                <span class="title" data-translate-key="heroSol5Title">Energia Solar e Renováveis</span>
-                <span class="desc" data-translate-key="heroSol5Desc">Termografia e inspeção de painéis</span>
+                <span class="title" data-translate-key="heroSol1Title"
+                  >Meio Ambiente</span
+                >
+                <span class="desc" data-translate-key="heroSol1Desc"
+                  >Monitoramento, APP e licenciamento</span
+                >
               </div>
               <span class="arrow" aria-hidden="true">›</span>
             </a>
@@ -878,9 +909,7 @@
               </li>
               <li><a href="#sobre" data-translate-key="navAbout">Sobre</a></li>
               <li>
-                <a
-                  href="#clientes"
-                  data-translate-key="navClients"
+                <a href="#clientes" data-translate-key="navClients"
                   >Nossos Clientes</a
                 >
               </li>
