@@ -145,8 +145,10 @@ nav a:hover { color: #fff; }
 }
 .hero-inner {
   position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: center;
+  display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: stretch;
 }
+.hero-inner > .fi:last-child { display: flex; flex-direction: column; }
+.hero-inner > .fi:last-child > .hero-img-wrap { flex: 1; display: flex; }
 .breadcrumb {
   display: flex; align-items: center; gap: 8px;
   font-size: 12px; font-weight: 600; letter-spacing: .12em;
@@ -200,8 +202,10 @@ h1 .verde { color: var(--verde); }
   box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(0,200,150,.12);
 }
 .hero-img-wrap img {
-  width: 100%; height: 480px; object-fit: cover; display: block;
+  width: 100%; height: 100%; min-height: 480px;
+  object-fit: cover; display: block;
   filter: brightness(.85);
+  flex: 1;
 }
 .hero-img-badge {
   position: absolute; bottom: 20px; left: 20px;
@@ -231,8 +235,9 @@ h1 .verde { color: var(--verde); }
   text-transform: uppercase; color: var(--verde); margin-bottom: 12px;
 }
 h2 {
-  font-size: clamp(30px, 3.5vw, 44px); font-weight: 800;
-  line-height: 1.15; letter-spacing: -.025em; margin-bottom: 14px;
+  font-size: clamp(44px, 5.5vw, 74px); font-weight: 900;
+  line-height: 1.0; letter-spacing: -.03em; margin-bottom: 22px;
+  text-transform: uppercase;
 }
 h2 em { font-style: normal; color: var(--verde); }
 .intro-sub { font-size: 16px; color: var(--txt-sec); max-width: 520px; margin: 0 auto; }
@@ -546,6 +551,7 @@ a.sol-item:hover { transform: translateY(-2px); }
   display: block; font-size: 11px; font-weight: 700; letter-spacing: .07em;
   text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 7px;
 }
+.fg label.req::after { content: ' *'; color: #ff6b6b; }
 .fg input, .fg select {
   width: 100%; background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
@@ -631,6 +637,45 @@ footer a:hover { color: #fff; }
   .cta-left { padding: 32px 24px; }
   .cta-right { padding: 28px 24px; }
 }
+
+/* ── LIGHTBOX ── */
+.zoom-img { cursor: zoom-in; transition: opacity .15s; }
+.zoom-img:hover { opacity: .92; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,.95);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px; cursor: zoom-out;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0; transition: opacity .25s ease;
+}
+.lightbox.open { display: flex; opacity: 1; }
+.lightbox img {
+  max-width: 95vw; max-height: 90vh;
+  width: auto; height: auto;
+  object-fit: contain; border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.6);
+  cursor: default; user-select: none;
+  -webkit-user-drag: none;
+}
+.lightbox-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff; border-radius: 50%;
+  font-size: 22px; font-weight: 300; line-height: 1;
+  cursor: pointer; display: grid; place-items: center;
+  transition: background .2s, transform .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.lightbox-close:hover { background: rgba(255,255,255,.2); transform: scale(1.05); }
+@media (max-width: 600px) {
+  .lightbox { padding: 12px; }
+  .lightbox img { max-width: 96vw; max-height: 86vh; border-radius: 6px; }
+  .lightbox-close { top: 12px; right: 12px; width: 42px; height: 42px; font-size: 22px; }
+}
+body.lb-open { overflow: hidden; }
 </style>
 </head>
 <body>
@@ -679,10 +724,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="breadcrumb">
           <span>01</span>
           <span style="opacity:.3">//</span>
-          <span>Mapeamento de Áreas Degradadas</span>
+          <span>Mapeamento</span>
         </div>
-        <div class="hero-kicker">DronyImagem — Mapeamento Ambiental</div>
-        <h1>MAPEAMENTO<br>DE ÁREAS<br><span class="verde">DEGRADADAS</span></h1>
+        <h1>MAPEAMENTO<br>DE <span class="verde">ÁREAS</span><br><span class="verde">DEGRADADAS</span></h1>
         <div class="hero-subtitle">Identificação de áreas passíveis de recuperação</div>
         <p class="hero-desc">As áreas passíveis de recuperação necessitam de um mapeamento com alta resolução espacial, aumentando a precisão e diminuindo os erros residuais calculados por imagens de satélite.</p>
         <div class="hero-etapas-label">Etapas do processo</div>
@@ -722,7 +766,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ══ INTRO CARDS ════════════════════════════════ -->
+<!-- ══ INTRO CARDS (oculto temporariamente) ════════
 <section id="intro">
   <div class="container">
     <div class="intro-header fi">
@@ -759,6 +803,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+══════════════════════════════════════════════ -->
 
 <!-- ══ DEEP DIVE — RELATÓRIOS TAC ═════════════════ -->
 <section id="deep-dive">
@@ -767,9 +812,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dd-eyebrow">
         02
         <span style="opacity:.3">//</span>
-        Relatórios para Termos de Ajuste de Conduta (TAC)
+        Mapeamento
       </div>
-      <h2>Mapas para apresentação de resultados de<br><em>Recuperação de Áreas Degradadas</em></h2>
+      <h2>Relatórios para Termos de Ajuste de Conduta (TAC)</h2>
       <p class="dd-lead">Os Projetos de Recuperação de Áreas Degradadas exigem relatórios periódicos da evolução dos resultados a partir do replantio e condução de espécies remanescentes, o que pode ser melhor apresentado a partir de ortomosaicos a partir de ortofotos capturadas por nossos drones.</p>
     </div>
 
@@ -801,9 +846,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dd-eyebrow">
         03
         <span style="opacity:.3">//</span>
-        Constatação de desfolhamento químico em área proibida
+        Agricultura de precisão
       </div>
-      <h2>Identificação precisa de<br><em>produto e concentração</em></h2>
+      <h2>Constatação de <em>desfolhamento</em> químico em área proibida</h2>
       <p class="dd-lead">Mapeamento com plataformas com sensores multiespectrais permitem a constatação de elementos que indicam a utilização de desfolhamento químico em locais proibidos indicando produto e concentração.</p>
     </div>
 
@@ -835,9 +880,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dd-eyebrow">
         04
         <span style="opacity:.3">//</span>
-        Mapas de prescrição para lavouras
+        Agricultura de precisão
       </div>
-      <h2>Aplicação variável<br><em>e sustentável</em></h2>
+      <h2><em>Mapas de prescrição</em> para lavouras</h2>
       <p class="dd-lead">Os nossos drones com sensores multiespectrais obtém múltiplas fotos de um mesmo ponto geográfico permitindo a análise de Índices Vegetativos e a prescrição de concentrações variadas de aplicação de agrodefensivos de modo econômico e sustentável.</p>
     </div>
 
@@ -867,9 +912,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dd-eyebrow">
         05
         <span style="opacity:.3">//</span>
-        Constatação de APPs e Reserva Legal
+        Mapeamento de áreas de reserva e empreendimentos energéticos
       </div>
-      <h2>Delimitação precisa de<br><em>APP e Reserva Legal</em></h2>
+      <h2>Constatação de APPs e Reserva Legal</h2>
       <p class="dd-lead">A utilização de drones de alta resolução e acurácia posicional permitem a geolocalização exata das feições de cursos hídricos e lâmina d'água de represas e reservatórios naturais permitindo o cálculo justo e exato da faixa de APP a ser preservada bem como a delimitação de Áreas de Reserva Legal.</p>
     </div>
 
@@ -902,10 +947,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dd-eyebrow">
         06
         <span style="opacity:.3">//</span>
-        Supressão vegetal e licenciamentos para CGH's / PCH's
+        Mapeamento de áreas de reserva e empreendimentos energéticos
       </div>
-      <h2>Modelagem digital de<br><em>terreno e superfície</em></h2>
-      <p class="dd-lead">Através da utilização de drones com sistema de posicionamento RTK/PPK são possíveis obtenção de imagens para:</p>
+      <h2><em>Supressão vegetal</em> e licenciamentos para <em>CGH's</em> / <em>PCH's</em></h2>
+      <p class="dd-lead">Através da utilização de drones com sistema de posicionamento RTK/PPK é possível obtenção de imagens para:</p>
       <div class="dd-deliverables">
         <div class="dd-deliverable">Modelos Digitais do Terreno</div>
         <div class="dd-deliverable">Modelos Digitais de Superfície</div>
@@ -1032,36 +1077,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="sec-header fi">
       <div class="section-kicker">Processo</div>
-      <h2>Do contato ao laudo,<br><em>sem complicação</em></h2>
+      <h2>Da demanda ao<br><em>Relatório Técnico</em></h2>
     </div>
     <div class="como-inner">
       <div class="steps fi">
         <div class="step-item">
           <div class="step-n">01</div>
           <div class="step-txt">
-            <h3>Você manda seus dados</h3>
-            <p>Preenche o formulário ou chama no WhatsApp com seu nome, estado e tipo de área. A gente retorna com um orçamento personalizado em até 24h.</p>
+            <h3>Você nos envia os dados</h3>
+            <p>Preencha o formulário com arquivos nas extensões .kml ou .shp referente à área a ser mapeada e, informe dados como nome e telefone que entraremos em contato o mais breve possível.</p>
           </div>
         </div>
         <div class="step-item">
           <div class="step-n">02</div>
           <div class="step-txt">
-            <h3>A gente vai até você</h3>
-            <p>Agendamos o voo, cuidamos de toda a autorização do espaço aéreo junto à ANAC e ao DECEA, e a equipe vai até a sua propriedade no dia combinado.</p>
+            <h3>O Time DronyImagem vai até a área</h3>
+            <p>Após o alinhamento prévio por ligação e definição do orçamento, nosso Time se desloca até a área para voo de reconhecimento e planejamento de trabalho e posteriormente o início do mapeamento.</p>
           </div>
         </div>
         <div class="step-item">
           <div class="step-n">03</div>
           <div class="step-txt">
-            <h3>Você recebe o laudo</h3>
-            <p>Processamos as imagens e entregamos o relatório técnico completo com dados georreferenciados — pronto para protocolar no órgão ambiental, cartório ou banco.</p>
+            <h3>Mapeamos e geramos os ortomosaicos</h3>
+            <p>Processamos as imagens mapeadas e elaboramos os ortomosaicos e mapas demandados para cada caso.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-n">04</div>
+          <div class="step-txt">
+            <h3>Elaboração do Laudo Técnico</h3>
+            <p>Após a conclusão e conferência do Laudo Técnico submetemos aos Órgãos ambientais ou entregamos em uma reunião de apresentação aos nossos clientes.</p>
           </div>
         </div>
         <div class="step-item" style="border-bottom:none">
-          <div class="step-n" style="background:rgba(0,200,150,.15);color:var(--verde)">✓</div>
+          <div class="step-n">05</div>
           <div class="step-txt">
-            <h3>Resultado garantido</h3>
-            <p>Caso o órgão solicite algum ajuste no documento, nossa equipe revisa sem custo adicional. Você não fica na mão.</p>
+            <h3>Prestamos suporte e analisamos feedback</h3>
+            <p>Atendemos ao resultado esperado fornecendo suporte técnico e desenvolvemos melhorias para análises temporais futuras de nossos clientes.</p>
           </div>
         </div>
       </div>
@@ -1076,8 +1128,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             >
           </div>
           <div class="como-card-body">
-            <h3>Pronto para um levantamento ambiental?</h3>
-            <p>Fale com nosso time, receba uma proposta personalizada e descubra como o drone pode acelerar o seu processo ambiental.</p>
+            <h3>Vamos desenvolver um mapeamento preciso da sua área?</h3>
+            <p>Fale com nosso Time DronyImagem e obtenha uma proposta detalhada que atenda à sua demanda descobrindo como a tecnologia com drones podem acelerar o desenvolvimento do seu projeto.</p>
             <a href="https://wa.me/5565999396490?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20mapeamento%20ambiental." class="btn btn-green como-card-btn" target="_blank">
               Falar no WhatsApp
             </a>
@@ -1139,45 +1191,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="faq-wrap">
       <div class="faq-item fi">
         <div class="faq-q" onclick="faq(this)">
-          Vocês atendem minha região?
+          Qual região vocês atendem?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Atendemos Mato Grosso (MT), Rondônia (RO), Pará (PA) e Amazonas (AM). Em caso de dúvida sobre a sua região, chama a gente no WhatsApp que a gente verifica e te responde na hora.</div>
+        <div class="faq-a">Atendemos Mato Grosso (MT), Rondônia (RO), Pará (PA) e Amazonas (AM). Em caso de dúvida sobre a sua região, nos chame no WhatsApp que a gente verifica a viabilidade para outras regiões do Brasil.</div>
       </div>
       <div class="faq-item fi" style="transition-delay:.05s">
         <div class="faq-q" onclick="faq(this)">
-          O relatório é aceito pelo órgão ambiental?
+          O Relatório Técnico é válido pelo Órgãos Responsáveis?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Sim. Nossos relatórios seguem os padrões técnicos exigidos por IBAMA e SEMA-MT. Se o órgão solicitar algum ajuste, a gente revisa sem custo extra.</div>
+        <div class="faq-a">Sim, dependendo da sua demanda, emitimos Laudos Técnicos e Relatórios Técnicos com ART registrada por Engenheiros Florestais e Gestores Ambientais com validação nos Órgãos como SEMA, IBAMA e Ministério Público.</div>
       </div>
       <div class="faq-item fi" style="transition-delay:.1s">
         <div class="faq-q" onclick="faq(this)">
-          Qual o prazo para receber o relatório?
+          Qual o prazo para entrega dos Relatórios Técnicos?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Após o voo, o processamento e o relatório ficam prontos em média em 5 a 10 dias úteis, dependendo do tamanho e complexidade da área. O prazo exato vem na proposta.</div>
+        <div class="faq-a">Em torno de 5 dias úteis a contar da conclusão do processo de mapeamento das áreas demandas.</div>
       </div>
       <div class="faq-item fi" style="transition-delay:.15s">
         <div class="faq-q" onclick="faq(this)">
-          Tem área mínima para contratar?
+          Qual o valor por hectare e a área mínima a ser mapeada?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Não. Cada projeto é orçado individualmente. A gente atende desde pequenas propriedades até grandes áreas — manda o tamanho que a gente calcula o valor.</div>
+        <div class="faq-a">O valor varia para cada demanda, dependendo da vegetação, cultura, topografia, acesso próximo para voo e extensão para elaboração dos trabalhos.</div>
       </div>
       <div class="faq-item fi" style="transition-delay:.2s">
         <div class="faq-q" onclick="faq(this)">
-          Vocês cuidam da autorização do voo?
+          O voo segue os padrões determinados pela ANAC?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Sim, tudo. A gente cuida da autorização junto à ANAC e ao DECEA. Você só precisa nos passar as coordenadas da área — o restante é com a gente.</div>
+        <div class="faq-a">Sim para nossos trabalhos serem validados e creditados pelos Órgãos Responsáveis são necessárias as devidas formalizações de acordo com a RBAC-E nº 94 aprovado pela ANAC e autorizações emitidas pelo SARPAS bem como o rígido controle da experiência técnica dos nossos pilotos.</div>
       </div>
       <div class="faq-item fi" style="transition-delay:.25s">
         <div class="faq-q" onclick="faq(this)">
           Como peço um orçamento?
           <div class="faq-arr">+</div>
         </div>
-        <div class="faq-a">Preenche o formulário aqui embaixo ou chama direto no WhatsApp. A gente responde em até 24h com uma proposta feita para a sua área.</div>
+        <div class="faq-a">É simples. Preencha o formulário aqui embaixo adiantando os dados da área ou nos chame direto no WhatsApp. A gente responde em até 24h com uma proposta feita para a sua área.</div>
       </div>
     </div>
   </div>
@@ -1202,16 +1254,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="form-title">Manda seus dados</div>
         <div class="form-sub">A gente entra em contato em até 24h</div>
         <div class="fg">
-          <label>Seu nome</label>
-          <input type="text" id="nome" placeholder="Como você se chama?">
+          <label class="req">Nome completo</label>
+          <input type="text" id="nome" placeholder="Qual seu nome completo?" required>
         </div>
         <div class="fg">
-          <label>WhatsApp</label>
-          <input type="tel" id="wpp" placeholder="(11) 99999-9999">
+          <label>E-mail</label>
+          <input type="email" id="email" placeholder="Qual seu melhor e-mail?">
         </div>
         <div class="fg">
-          <label>Estado da área</label>
-          <select id="estado">
+          <label class="req">WhatsApp (DDD + número)</label>
+          <input type="tel" id="wpp" placeholder="(65) 99999-9999" required>
+        </div>
+        <div class="fg">
+          <label class="req">Estado da propriedade</label>
+          <select id="estado" required>
             <option value="" disabled selected>Onde fica a propriedade?</option>
             <option>MT — Mato Grosso</option>
             <option>RO — Rondônia</option>
@@ -1221,14 +1277,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </select>
         </div>
         <div class="fg">
-          <label>O que você precisa?</label>
-          <select id="servico">
-            <option value="" disabled selected>Tipo de serviço</option>
-            <option>Mapeamento de área degradada</option>
-            <option>Supressão vegetal / licenciamento</option>
-            <option>APP e Reserva Legal</option>
-            <option>Monitoramento ambiental</option>
-            <option>Outro serviço</option>
+          <label>Cidade da área a ser mapeada</label>
+          <input type="text" id="cidade" placeholder="Em qual cidade fica a área?">
+        </div>
+        <div class="fg">
+          <label>Finalidade ou objetivo do mapeamento</label>
+          <input type="text" id="finalidade" placeholder="Ex: TAC, APP, supressão vegetal...">
+        </div>
+        <div class="fg">
+          <label>Tem arquivo .kml ou shapefile (.zip) da área?</label>
+          <select id="arquivo">
+            <option value="" disabled selected>Selecione...</option>
+            <option>Sim — envio pelo WhatsApp</option>
+            <option>Ainda não tenho</option>
+            <option>Posso providenciar</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Melhor horário para ligação</label>
+          <select id="horario">
+            <option value="" disabled selected>Quando podemos ligar?</option>
+            <option>Manhã (8h–12h)</option>
+            <option>Tarde (13h–18h)</option>
+            <option>Noite (após 18h)</option>
+            <option>Qualquer horário</option>
           </select>
         </div>
         <button class="btn btn-green btn-submit" onclick="enviar()">Quero meu orçamento</button>
@@ -1257,6 +1329,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ══ TOAST ══════════════════════════════════════ -->
 <div class="toast" id="toast">✅ Recebemos seu contato! Retornamos em até 24h.</div>
+
+<!-- ══ LIGHTBOX ════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagem">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar imagem">×</button>
+  <img id="lightboxImg" alt="">
+</div>
 
 <script>
 // Fade in on scroll
@@ -1291,20 +1369,77 @@ function faq(el) {
 
 // Form submit
 function enviar() {
-  const nome    = document.getElementById('nome').value.trim();
-  const wpp     = document.getElementById('wpp').value.trim();
-  const estado  = document.getElementById('estado').value || '';
-  const servico = document.getElementById('servico').value || '';
-  if (!nome || !wpp) { alert('Por favor, preencha seu nome e WhatsApp.'); return; }
+  const nome       = document.getElementById('nome').value.trim();
+  const email      = document.getElementById('email').value.trim();
+  const wpp        = document.getElementById('wpp').value.trim();
+  const estado     = document.getElementById('estado').value || '';
+  const cidade     = document.getElementById('cidade').value.trim();
+  const finalidade = document.getElementById('finalidade').value.trim();
+  const arquivo    = document.getElementById('arquivo').value || '';
+  const horario    = document.getElementById('horario').value || '';
+
+  const obrigatorios = [
+    { id: 'nome',   valor: nome,   label: 'Nome completo' },
+    { id: 'wpp',    valor: wpp,    label: 'WhatsApp' },
+    { id: 'estado', valor: estado, label: 'Estado da propriedade' }
+  ];
+  for (const c of obrigatorios) {
+    if (!c.valor) {
+      alert(`Por favor, preencha o campo: ${c.label}.`);
+      document.getElementById(c.id).focus();
+      return;
+    }
+  }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Por favor, informe um e-mail válido.');
+    document.getElementById('email').focus();
+    return;
+  }
+
   const msg = encodeURIComponent(
     `Olá! Vim pelo site e gostaria de um orçamento.\n\n` +
-    `*Nome:* ${nome}\n*Estado:* ${estado || 'não informado'}\n*Serviço:* ${servico || 'não informado'}`
+    `*Nome:* ${nome}\n` +
+    `*E-mail:* ${email || 'não informado'}\n` +
+    `*WhatsApp:* ${wpp}\n` +
+    `*Estado:* ${estado || 'não informado'}\n` +
+    `*Cidade:* ${cidade || 'não informada'}\n` +
+    `*Finalidade:* ${finalidade || 'não informada'}\n` +
+    `*Arquivo da área:* ${arquivo || 'não informado'}\n` +
+    `*Melhor horário:* ${horario || 'qualquer horário'}`
   );
   document.getElementById('toast').classList.add('show');
   setTimeout(() => document.getElementById('toast').classList.remove('show'), 4500);
   // WhatsApp DronyImagem
   setTimeout(() => window.open(`https://wa.me/5565999396490?text=${msg}`, '_blank'), 800);
 }
+
+// Lightbox — abrir imagens em tamanho maior
+(function() {
+  const lb     = document.getElementById('lightbox');
+  const lbImg  = document.getElementById('lightboxImg');
+  const lbBtn  = document.getElementById('lightboxClose');
+  const SEL    = '.hero-img-wrap img, .dd-img-stack img, .dd-img-filled img, .dd-mapa-wrap img';
+
+  function open(src, alt) {
+    lbImg.src = src; lbImg.alt = alt || '';
+    lb.classList.add('open');
+    document.body.classList.add('lb-open');
+  }
+  function close() {
+    lb.classList.remove('open');
+    document.body.classList.remove('lb-open');
+    setTimeout(() => { lbImg.src = ''; }, 300);
+  }
+
+  document.querySelectorAll(SEL).forEach(img => {
+    img.classList.add('zoom-img');
+    img.addEventListener('click', () => open(img.currentSrc || img.src, img.alt));
+  });
+
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  lbBtn.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
+})();
 </script>
 
 <!-- ══ WPP FLUTUANTE ═══════════════════════════════ -->
